@@ -2,4 +2,5 @@
     <string name="app_name">Perusnia</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btn_lanjutMembaca"><u>Lanjut Membaca</u></string>
 </resources>
