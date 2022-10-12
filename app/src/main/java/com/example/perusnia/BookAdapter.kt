@@ -7,11 +7,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
+//dengan paramere booklist tipe data array list
 class BookAdapter(private val bookList:ArrayList<Book>)
     : RecyclerView.Adapter<BookAdapter.BookViewHolder>(){
 
     var onItemClick : ((Book) -> Unit)? = null
 
+    //menandai setiap id yang ingin di set data
     class BookViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val gambarBuku: ImageView = itemView.findViewById(R.id.GambarBuku)
         val judulBuku: TextView = itemView.findViewById(R.id.judulBuku)
@@ -20,10 +22,12 @@ class BookAdapter(private val bookList:ArrayList<Book>)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
+        //inialisasi layout yang ingin di set data
         val view = LayoutInflater.from(parent.context).inflate(R.layout.book_card_design,parent,false)
         return  BookViewHolder(view)
     }
 
+    //melakukan set data
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
         val book = bookList[position]
         holder.gambarBuku.setImageResource(book.GambarBuku)
@@ -31,6 +35,7 @@ class BookAdapter(private val bookList:ArrayList<Book>)
         holder.Pengarang.text = book.Pengarang
         holder.Harga.text = book.Harga
 
+        //beri action clik pada itemview
         holder.itemView.setOnClickListener{
             onItemClick?.invoke(book)
         }

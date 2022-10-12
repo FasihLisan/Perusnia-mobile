@@ -81,6 +81,25 @@
                         android:textColor="@color/white"
                         android:textSize="20dp" />
 
+                    <ImageView
+                        android:id="@+id/btn_cart"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_baseline_shopping_cart_24"
+                        android:layout_gravity="right"
+                        android:layout_margin="15dp"
+                        android:clickable="true"/>
+
+                    <ImageView
+                        android:id="@+id/btn_search"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_baseline_search_24"
+                        android:layout_gravity="left"
+                        android:layout_margin="15dp"
+                        android:clickable="true"/>
+
+
 
                 </androidx.cardview.widget.CardView>
 
@@ -248,7 +267,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -263,18 +282,20 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_width="fill_parent"
+                    android:id="@+id/btn_ViewMore"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackgroundBorderless"
                     android:gravity="right"
+                    android:layout_alignParentRight="true"
                     android:text="View More >"
                     android:textColor="@color/green"
                     android:textSize="15dp"
                     android:textStyle="italic" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

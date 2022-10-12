@@ -19,14 +19,17 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        //inialissi recycleview
         recyclerView = findViewById(R.id.recyclerview)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this,RecyclerView.HORIZONTAL, false)
 
         bookList = ArrayList()
 
+        //isi varible booklist dengn arraylist
         val bookList = bookList
 
+        //isi data varible bookList dengan tipe data array list
         for (i in 1..20) {
             bookList.add(
                 Book(
@@ -49,9 +52,11 @@ class HomeActivity : AppCompatActivity() {
             )
         }
 
+        //kirimkan data ke bookAdapter
         bookAdapter = BookAdapter(bookList)
         recyclerView.adapter = bookAdapter
 
+        //beri fungsi onitemclick yang terdapat pada bookAdapter edngan men start activity bookdetail, dengan data/putextra book dengan value list yang di kirim
         bookAdapter.onItemClick = {
             val intent = Intent(this, BookDetileActivity::class.java)
             intent.putExtra("book",it)
@@ -90,5 +95,13 @@ class HomeActivity : AppCompatActivity() {
             false
         })
         //--------------------navigation-----------------------------------
+        btn_ViewMore.setOnClickListener{
+            val intent = Intent(this@HomeActivity, BookActivity::class.java)
+            startActivity(intent)
+        }
+        btn_cart.setOnClickListener{
+            val intent = Intent(this@HomeActivity, CartActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
