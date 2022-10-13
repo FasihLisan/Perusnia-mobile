@@ -31,7 +31,7 @@ class BookDetileActivity : AppCompatActivity() {
 
 
         btn_back.setOnClickListener{
-            startActivity(Intent(this@BookDetileActivity,HomeActivity::class.java))
+           finish()
         }
         btn_addFavorite.setOnClickListener{
             btn_addFavorite.setColorFilter(ContextCompat.getColor(this,R.color.red), android.graphics.PorterDuff.Mode.MULTIPLY);
