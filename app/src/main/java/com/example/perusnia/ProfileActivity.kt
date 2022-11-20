@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_profile.*
 
 
@@ -11,6 +12,8 @@ class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
+
+        Picasso.get().load("https://perusnia.000webhostapp.com/api/files.php?api_key=fasih123&file=p1.png").into(profile);
 
         bottom_navigation.selectedItemId = R.id.profile
 
