@@ -1,8 +1,11 @@
 package com.example.perusnia
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.perusnia.storage.SharedPrefManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_profile.*
@@ -13,7 +16,18 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-        Picasso.get().load("https://perusnia.000webhostapp.com/api/files.php?api_key=fasih123&file=p1.png").into(profile);
+        val sharedPrefManager = SharedPrefManager.getInstance(this).user
+        Log.d("sahredPrefManager",sharedPrefManager.email.toString())
+
+        try {
+            Picasso.get()
+                .load("http://10.0.2.2/perusnia/api/files.php?api_key=fasih123&file=p1.png")
+                .placeholder(R.drawable.ic_baseline_sync_24)
+                .error(R.drawable.ic_baseline_error_outline_24)
+                .into(profile)
+        }catch (e: Exception){
+            Log.i("Picasso:","Message => "+e);
+        }
 
         bottom_navigation.selectedItemId = R.id.profile
 
