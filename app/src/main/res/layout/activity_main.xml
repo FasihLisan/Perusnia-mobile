@@ -27,6 +27,7 @@
             android:gravity="center_horizontal"
             android:layout_marginVertical="60dp">
             <TextView
+                android:id="@+id/Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Perusnia Book"
@@ -35,6 +36,7 @@
                 android:textColor="@color/black"
                 android:layout_marginBottom="15dp"/>
             <TextView
+                android:id="@+id/subTitle"
                 android:layout_width="223dp"
                 android:layout_height="wrap_content"
                 android:text="Baca Buku digital dimanapundan kapanpun"

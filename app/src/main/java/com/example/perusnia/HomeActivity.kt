@@ -106,7 +106,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    override fun onStart() {
+    override fun onStart() { // code ayng di jalankan di awal atau menggunakan init{}
         super.onStart()
 
         if (!SharedPrefManager.getInstance(this).isLoggedIn){
@@ -116,5 +116,6 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
 
 }

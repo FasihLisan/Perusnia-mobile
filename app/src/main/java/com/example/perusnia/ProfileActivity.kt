@@ -4,11 +4,17 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.perusnia.Model.userResponse
+import com.example.perusnia.Retrofit.RetrofitClient
 import com.example.perusnia.storage.SharedPrefManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_profile.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class ProfileActivity : AppCompatActivity() {
@@ -17,16 +23,46 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
 
         val sharedPrefManager = SharedPrefManager.getInstance(this).user
-        Log.d("sahredPrefManager",sharedPrefManager.email.toString())
+        val id_users = sharedPrefManager.id_users.toInt()
 
-        try {
-            Picasso.get()
-                .load("http://10.0.2.2/perusnia/api/files.php?api_key=fasih123&file=p1.png")
-                .placeholder(R.drawable.ic_baseline_sync_24)
-                .error(R.drawable.ic_baseline_error_outline_24)
-                .into(profile)
-        }catch (e: Exception){
-            Log.i("Picasso:","Message => "+e);
+
+        RetrofitClient.instance.getSpesificUser(id_users)
+            .enqueue(object : Callback<userResponse?> {
+                override fun onResponse(
+                    call: Call<userResponse?>,
+                    response: Response<userResponse?>
+                ) {
+
+                    try {
+                        Picasso.get()
+                            .load("http://10.0.2.2/perusnia/api/files.php?api_key=fasih123&file=${response.body()?.data!!.foto}")
+                            .placeholder(R.drawable.default_image)
+                            .error(R.drawable.default_image)
+                            .into(profile)
+                    }catch (e: Exception){
+                        Log.i("Picasso:","Message => "+e);
+                    }
+
+                    accountName.text = response.body()?.data!!.namaDepan+" "+response.body()?.data!!.namaBelakang
+
+                }
+
+                override fun onFailure(call: Call<userResponse?>, t: Throwable) {
+                    Toast.makeText(applicationContext,t.message, Toast.LENGTH_LONG).show();
+                }
+            })
+
+
+
+        btn_accountSetting.setOnClickListener(){
+            startActivity(Intent(applicationContext,AccountSetting::class.java))
+        }
+
+        btn_logout.setOnClickListener(){
+            val sharedPrefManager = SharedPrefManager.getInstance(this)
+            sharedPrefManager.clear()
+
+            startActivity(Intent(applicationContext,MainActivity::class.java))
         }
 
         bottom_navigation.selectedItemId = R.id.profile

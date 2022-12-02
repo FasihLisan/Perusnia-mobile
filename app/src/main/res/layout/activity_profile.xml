@@ -30,6 +30,7 @@
                         android:src="@drawable/banner"
                         android:scaleType="fitXY"/>
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/containerProfile"
                     android:layout_width="100dp"
@@ -43,16 +44,23 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/ic_baseline_account_circle_24"
-                        android:scaleType="fitXY"/>
+                        android:scaleType="fitXY" />
                 </androidx.cardview.widget.CardView>
+
+
+
+
+
             </RelativeLayout>
             <TextView
+                android:id="@+id/accountName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ACH. FASIHUL LISAN"
                 android:layout_gravity="center"
                 android:textStyle="bold"
-                android:textSize="15dp"/>
+                android:textSize="15dp"
+                android:textAllCaps="true"/>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -134,9 +142,10 @@
                     android:drawableBottom="@color/black"
                     android:clickable="true"
                     android:focusable="true"
+                    android:drawablePadding="5dp"
+                    android:drawableLeft="@drawable/ic_baseline_manage_accounts_24"
                     android:foreground="?android:attr/selectableItemBackgroundBorderless"/>
 
-            <View android:background="@color/grey1" android:layout_marginVertical="5dp" android:layout_width="match_parent" android:layout_height="1px"/>
 
                 <TextView
                     android:id="@+id/btn_termsAndConditions"
@@ -148,9 +157,10 @@
                     android:text="Terms And Conditions"
                     android:padding="15dp"
                     android:textSize="16dp"
+                    android:drawablePadding="5dp"
+                    android:drawableLeft="@drawable/ic_baseline_assignment_24"
                     android:drawableBottom="@color/black"/>
 
-            <View android:background="@color/grey1" android:layout_marginVertical="5dp" android:layout_width="match_parent" android:layout_height="1px"/>
 
                 <TextView
                     android:id="@+id/btn_serviceCenter"
@@ -162,9 +172,10 @@
                     android:text="Service Center"
                     android:padding="15dp"
                     android:textSize="16dp"
+                    android:drawablePadding="5dp"
+                    android:drawableLeft="@drawable/ic_baseline_settings_phone_24"
                     android:drawableBottom="@color/black"/>
 
-            <View android:background="@color/grey1" android:layout_marginVertical="5dp" android:layout_width="match_parent" android:layout_height="1px"/>
 
                 <TextView
                     android:id="@+id/btn_logout"
@@ -176,9 +187,10 @@
                     android:text="Logout"
                     android:padding="15dp"
                     android:textSize="16dp"
+                    android:drawablePadding="5dp"
+                    android:drawableLeft="@drawable/ic_baseline_logout_24"
                     android:drawableBottom="@color/black"/>
 
-            <View android:background="@color/grey1" android:layout_marginVertical="5dp" android:layout_width="match_parent" android:layout_height="1px"/>
 
         </LinearLayout>
     </ScrollView>

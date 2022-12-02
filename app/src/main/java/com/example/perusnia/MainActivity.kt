@@ -9,12 +9,14 @@ import android.widget.Toast
 import com.example.perusnia.Model.LoginResponse
 import com.example.perusnia.Retrofit.RetrofitClient
 import com.example.perusnia.storage.SharedPrefManager
+import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.btn_signin
 import kotlinx.android.synthetic.main.activity_main.txtEmail
 import kotlinx.android.synthetic.main.activity_main.txtPassword
 import kotlinx.android.synthetic.main.activity_signup.*
 import kotlinx.android.synthetic.main.activity_signup.view.*
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
