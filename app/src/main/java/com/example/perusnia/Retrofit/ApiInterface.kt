@@ -1,8 +1,6 @@
 package com.example.perusnia.Retrofit
 
-import com.example.perusnia.Model.DefaultResponse
-import com.example.perusnia.Model.LoginResponse
-import com.example.perusnia.Model.userResponse
+import com.example.perusnia.Model.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -67,6 +65,24 @@ interface ApiInterface {
     /*
     **  ------Book API------
     */
+
+    @GET("api/book.php?api_key=fasih123")
+    fun getBook():Call<bookResponse>
+
+    @GET("api/getTopRateBook.php?api_key=fasih123")
+    fun getTopRateBook():Call<TopRatedBook_Response>
+
+    @GET("api/rateBook.php")
+    fun getSpesificRateBook(
+        @Query("api_key")api_key:String,
+        @Query("id_users")id_users:Int,
+        @Query("id_book")id_book:Int
+    ):Call<RateBook_Response>
+
+
+
+
+
 
     /*
     **  ------Note API------

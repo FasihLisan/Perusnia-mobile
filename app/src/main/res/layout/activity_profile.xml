@@ -19,12 +19,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/containerBanner"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     app:cardCornerRadius="15dp">
                     <ImageView
-                        android:id="@+id/banner"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/banner"
@@ -85,7 +83,6 @@
                             android:textStyle="bold"
                             android:textColor="@color/grey1"/>
                         <TextView
-                            android:id="@+id/yourBookCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="22"
@@ -104,7 +101,6 @@
                             android:textStyle="bold"
                             android:textColor="@color/grey1"/>
                         <TextView
-                            android:id="@+id/favoriteCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="5"
@@ -123,7 +119,6 @@
                             android:textStyle="bold"
                             android:textColor="@color/grey1"/>
                         <TextView
-                            android:id="@+id/cartCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="5"
@@ -148,7 +143,6 @@
 
 
                 <TextView
-                    android:id="@+id/btn_termsAndConditions"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackgroundBorderless"
@@ -163,7 +157,6 @@
 
 
                 <TextView
-                    android:id="@+id/btn_serviceCenter"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackgroundBorderless"

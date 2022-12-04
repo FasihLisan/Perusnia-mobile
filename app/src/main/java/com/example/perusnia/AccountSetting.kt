@@ -103,7 +103,7 @@ class AccountSetting : AppCompatActivity(), userUploadRequestBody.UploadCallback
 
                     try {
                         Picasso.get()
-                            .load("http://10.0.2.2/perusnia/api/files.php?api_key=fasih123&file=${response.body()?.data!!.foto}")
+                            .load("${RetrofitClient.BASE_URL}api/files.php?api_key=fasih123&file=${response.body()?.data!!.foto}")
                             .placeholder(R.drawable.default_image)
                             .error(R.drawable.ic_baseline_error_outline_24)
                             .into(profileImage)

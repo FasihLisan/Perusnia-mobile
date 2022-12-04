@@ -44,7 +44,6 @@
                        android:orientation="horizontal"
                        android:layout_marginBottom="10dp">
                        <TextView
-                           android:id="@+id/titleNote"
                            android:layout_width="match_parent"
                            android:layout_height="wrap_content"
                            android:textStyle="bold"
@@ -61,7 +60,6 @@
                        android:orientation="horizontal"
                        android:layout_marginBottom="10dp">
                         <TextView
-                            android:id="@+id/previewNoteBody"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="4"
@@ -70,7 +68,6 @@
                             android:text="Lorem ipsum dolor sit amet consectetur. Ante aliquam amet tempor posuere placerat pharetra viverra amet. Erat duis"/>
                    </LinearLayout>
                    <TextView
-                       android:id="@+id/tglNote"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
                        android:gravity="right|center"

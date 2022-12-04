@@ -64,7 +64,6 @@
                 android:padding="10dp"
                 android:layout_weight="1.2">
                 <TextView
-                    android:id="@+id/titleBook"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Buku sejarah uang kuno"
@@ -74,7 +73,6 @@
                     android:ellipsize="end"
                     android:textColor="@color/black"/>
                 <TextView
-                    android:id="@+id/author"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Salman alrosyid"
@@ -84,7 +82,6 @@
                     android:ellipsize="end"
                     android:textColor="@color/grey1"/>
                 <TextView
-                    android:id="@+id/publisher"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ach. fasihul lisan"
@@ -94,7 +91,6 @@
                     android:ellipsize="end"
                     android:textColor="@color/grey1"/>
                 <TextView
-                    android:id="@+id/price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Rp. 50.000"
@@ -108,7 +104,6 @@
                     android:gravity="bottom"/>
             </LinearLayout>
             <TextView
-                android:id="@+id/btn_remove"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Remove"
@@ -145,7 +140,6 @@
                 android:padding="10dp"
                 android:layout_weight="1.2">
                 <TextView
-                    android:id="@+id/titleBook1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Buku sejarah uang kuno"
@@ -155,7 +149,6 @@
                     android:ellipsize="end"
                     android:textColor="@color/black"/>
                 <TextView
-                    android:id="@+id/author1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Salman alrosyid"
@@ -165,7 +158,6 @@
                     android:ellipsize="end"
                     android:textColor="@color/grey1"/>
                 <TextView
-                    android:id="@+id/publisher1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ach. fasihul lisan"
@@ -175,7 +167,6 @@
                     android:ellipsize="end"
                     android:textColor="@color/grey1"/>
                 <TextView
-                    android:id="@+id/price1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Rp. 50.000"
@@ -189,7 +180,6 @@
                     android:gravity="bottom"/>
             </LinearLayout>
             <TextView
-                android:id="@+id/btn_remove1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Remove"
@@ -223,7 +213,6 @@
                 android:layout_height="wrap_content"
                 android:text="TOTAL(5 ITEMS)"/>
             <TextView
-                android:id="@+id/totalPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rp. 250.000"
@@ -231,7 +220,6 @@
                 android:textStyle="bold"/>
         </LinearLayout>
         <androidx.cardview.widget.CardView
-            android:id="@+id/btn_checkout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="20dp"

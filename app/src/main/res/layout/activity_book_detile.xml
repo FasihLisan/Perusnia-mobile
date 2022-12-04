@@ -16,7 +16,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="100dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -132,7 +133,6 @@
                 </LinearLayout>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/StatusBuku"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_gravity="center_vertical"
@@ -197,7 +197,6 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/readBuku"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="2dp"
@@ -224,7 +223,6 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/pageBook"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="2dp"
@@ -240,11 +238,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|center_vertical"
-                    android:orientation="vertical"
-                    android:paddingBottom="100dp">
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/sinopsisBukuTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingVertical="10dp"
@@ -265,9 +261,62 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingVertical="20dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="10dp"
+                        android:text="Rating this book"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+                    <RatingBar
+                        android:id="@+id/btn_ratingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/RatingBar"
+                        android:layout_gravity="center_horizontal"
+                        />
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="?attr/textInputFilledStyle"
+                        android:id="@+id/filledTextField"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:hint="Feedback"
+                        app:boxBackgroundColor="@color/grey"
+                        app:boxStrokeColor="@color/green"
+
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txtFedback"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="top"
+                            android:inputType="textMultiLine"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <Button
+                        android:id="@+id/btn_feedback"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Send Feedback"
+                        android:layout_gravity="right"
+                        />
+                </LinearLayout>
+
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </ScrollView>
+
+<!--scrollview-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -287,16 +336,17 @@
             android:layout_gravity="center_vertical|center_horizontal"
             app:cardBackgroundColor="@color/grey"
             app:cardElevation="5dp">
-
-            <ImageView
-                android:id="@+id/btn_addFavorite"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_baseline_favorite_24"
-                app:tint="@color/grey1"
-                android:layout_margin="10dp" />
-
+            <com.like.LikeButton
+                android:id="@+id/btn_favorite"
+                app:icon_type="heart"
+                app:icon_size="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp" />
         </androidx.cardview.widget.CardView>
+
+
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -307,7 +357,6 @@
             app:cardCornerRadius="15dp">
 
             <TextView
-                android:id="@+id/btn_ReadBook"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@color/white"

@@ -45,7 +45,6 @@
                     app:cardCornerRadius="15dp">
 
                     <ImageView
-                        android:id="@+id/banner_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:contentDescription="Welcome"
@@ -53,27 +52,26 @@
                         android:src="@drawable/banner" />
 
                     <TextView
-                        android:id="@+id/hello"
-                        android:layout_width="122dp"
-                        android:layout_height="30dp"
+                        android:id="@+id/usernameHello"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:layout_gravity="center_horizontal"
                         android:layout_marginTop="25dp"
                         android:fontFamily="sans-serif-medium"
-                        android:gravity="top"
+                        android:gravity="center_horizontal"
+                        android:layout_marginHorizontal="60dp"
                         android:text="Hello, Fasih!"
                         android:textColor="@color/white"
                         android:textSize="20dp" />
 
                     <TextView
-                        android:id="@+id/descript"
                         android:layout_width="287dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
                         android:layout_gravity="center"
-                        android:layout_marginTop="-30dp"
+                        android:layout_marginTop="-50dp"
                         android:fontFamily="sans-serif-light"
                         android:gravity="top|center"
                         android:text="Welcome to PERUSNIA BOOKS. You can Read The Book Here!"
@@ -88,7 +86,9 @@
                         android:src="@drawable/ic_baseline_shopping_cart_24"
                         android:layout_gravity="right"
                         android:layout_margin="15dp"
-                        android:clickable="true"/>
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackgroundBorderless"/>
 
                     <ImageView
                         android:id="@+id/btn_search"
@@ -97,7 +97,9 @@
                         android:src="@drawable/ic_baseline_search_24"
                         android:layout_gravity="left"
                         android:layout_margin="15dp"
-                        android:clickable="true"/>
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackgroundBorderless"/>
 
 
 
@@ -124,13 +126,11 @@
                         app:cardUseCompatPadding="true">
 
                         <LinearLayout
-                            android:id="@+id/title_lastRead"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/lastRead"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
@@ -146,7 +146,6 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/button_lanjutMembaca"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="20dp"
@@ -161,7 +160,6 @@
                     </androidx.cardview.widget.CardView>
 
                     <LinearLayout
-                        android:id="@+id/lastBookRead_layout"
                         android:layout_width="match_parent"
                         android:layout_height="120dp"
                         android:layout_marginTop="100dp"
@@ -176,7 +174,6 @@
                             app:cardElevation="15dp">
 
                             <ImageView
-                                android:id="@+id/lastBookRead"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:contentDescription="Welcome"
@@ -194,7 +191,6 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/lastBookRead_title"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Perkembangan uang seluruh dunia"
@@ -203,7 +199,6 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/lastBookRead_author"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Salman Alrosyid"
@@ -218,7 +213,6 @@
             </RelativeLayout>
 
             <LinearLayout
-                android:id="@+id/filter"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center|left"
@@ -236,7 +230,6 @@
                     app:cardElevation="5dp">
 
                     <TextView
-                        android:id="@+id/title_filter_free"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_horizontal|center_vertical"
@@ -256,7 +249,6 @@
                     app:cardElevation="5dp">
 
                     <TextView
-                        android:id="@+id/title_filter_paid"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_horizontal|center_vertical"
@@ -277,7 +269,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Books Collection"
+                    android:text="Top Rated Book"
                     android:textSize="15dp"
                     android:textStyle="bold" />
 
@@ -307,7 +299,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:itemCount="5"
-                    tools:listitem="@layout/book_card_design" />
+                    tools:listitem="@layout/top_rated_book_item" />
 
             </LinearLayout>
 

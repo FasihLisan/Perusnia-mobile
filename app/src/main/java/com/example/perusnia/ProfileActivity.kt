@@ -35,7 +35,7 @@ class ProfileActivity : AppCompatActivity() {
 
                     try {
                         Picasso.get()
-                            .load("http://10.0.2.2/perusnia/api/files.php?api_key=fasih123&file=${response.body()?.data!!.foto}")
+                            .load("${RetrofitClient.BASE_URL}api/files.php?api_key=fasih123&file=${response.body()?.data!!.foto}")
                             .placeholder(R.drawable.default_image)
                             .error(R.drawable.default_image)
                             .into(profile)

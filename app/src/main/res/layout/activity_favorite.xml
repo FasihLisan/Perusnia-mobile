@@ -30,7 +30,6 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -42,7 +41,6 @@
             </androidx.cardview.widget.CardView>
 
             <LinearLayout
-                android:id="@+id/filter"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center|left"
@@ -62,7 +60,6 @@
                     app:cardElevation="5dp">
 
                     <TextView
-                        android:id="@+id/title_filter_free"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_horizontal|center_vertical"
@@ -82,7 +79,6 @@
                     app:cardElevation="5dp">
 
                     <TextView
-                        android:id="@+id/title_filter_paid"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_horizontal|center_vertical"
@@ -103,7 +99,7 @@
                     android:id="@+id/recyclerview1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:listitem="@layout/book_card_design"
+                    tools:listitem="@layout/top_rated_book_item"
                     android:layout_gravity="center_horizontal" />
 
             </LinearLayout>
