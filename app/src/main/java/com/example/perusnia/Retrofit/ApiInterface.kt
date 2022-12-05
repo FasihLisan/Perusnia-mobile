@@ -8,6 +8,7 @@ import retrofit2.http.Field
 import retrofit2.http.FieldMap
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.HTTP
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
@@ -80,16 +81,36 @@ interface ApiInterface {
     ):Call<RateBook_Response>
 
 
+    /*
+    **  ------Favorit API------
+    */
 
+    @GET("api/favoriteBook.php?api_key=fasih123")
+    fun getFavorite(@Query("id_users")id_users: Int):Call<bookResponse>
 
+    @GET("api/favoriteBook.php?api_key=fasih123")
+    fun getSpesificFavorite(
+        @Query("id_users")id_users: Int,
+        @Query("id_book")id_book: Int
+    ):Call<DefaultResponse>
+
+    @FormUrlEncoded
+    @POST("api/insertFavoriteBook.php?api_key=fasih123")
+    fun insertFavorite(
+        @Field("id_users") id_users: Int,
+        @Field("id_book") id_book: Int
+    ):Call<DefaultResponse>
+
+    @FormUrlEncoded
+    @HTTP(method = "DELETE", path = "api/deleteFavoriteBook.php?api_key=fasih123", hasBody = true)
+    fun deleteFavorite(
+        @Field("id_users") id_users: Int,
+        @Field("id_book") id_book: Int
+    ): Call<DefaultResponse>
 
 
     /*
     **  ------Note API------
-    */
-
-    /*
-    **  ------Favorit API------
     */
 
     /*

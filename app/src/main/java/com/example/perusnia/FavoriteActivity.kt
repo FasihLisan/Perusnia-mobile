@@ -5,10 +5,15 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.perusnia.Model.DataX
+import com.example.perusnia.Model.bookResponse
 import com.example.perusnia.Retrofit.RetrofitClient
+import com.example.perusnia.adapter.FavoriteAdapter
+import com.example.perusnia.storage.SharedPrefManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_favorite.bottom_navigation
+import kotlinx.android.synthetic.main.activity_favorite.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,6 +21,10 @@ import retrofit2.Response
 
 class FavoriteActivity : AppCompatActivity() {
 
+    lateinit var favoriteAdapter: FavoriteAdapter
+
+    val sharedPrefManager = SharedPrefManager.getInstance(this).user
+    val id_users = sharedPrefManager.id_users.toInt()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +61,49 @@ class FavoriteActivity : AppCompatActivity() {
             false
         })
         //--------------------navigation-----------------------------------
+    }
+
+    override fun onStart() {
+        super.onStart()
+        setupRecylerView()
+        getDataFromAPI()
+    }
+
+    private fun setupRecylerView(){
+        favoriteAdapter = FavoriteAdapter(arrayListOf(),object : FavoriteAdapter.OnAdapterListener {
+            override fun onClick(data: DataX) {
+                startActivity(
+                    Intent(applicationContext,BookDetileActivity::class.java)
+                        .putExtra("book",data)
+                )
+            }
+        })
+        recyclerview.apply {
+            layoutManager = LinearLayoutManager(applicationContext,RecyclerView.VERTICAL,false)
+            adapter = favoriteAdapter
+        }
+    }
+
+    private fun getDataFromAPI(){
+        RetrofitClient.instance.getFavorite(id_users)
+            .enqueue(object : Callback<bookResponse?> {
+                override fun onResponse(
+                    call: Call<bookResponse?>,
+                    response: Response<bookResponse?>
+                ) {
+                    if (response.isSuccessful){
+                        showData(response.body()!!)
+                    }
+                }
+
+                override fun onFailure(call: Call<bookResponse?>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            })
+    }
+    private fun showData(response: bookResponse){
+        val datas = response.data!!
+        favoriteAdapter.setData(datas)
     }
 
 }

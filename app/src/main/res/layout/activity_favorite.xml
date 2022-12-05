@@ -96,10 +96,10 @@
                 android:layout_marginHorizontal="15dp">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview1"
+                    android:id="@+id/recyclerview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:listitem="@layout/top_rated_book_item"
+                    tools:listitem="@layout/favorite_book_item"
                     android:layout_gravity="center_horizontal" />
 
             </LinearLayout>

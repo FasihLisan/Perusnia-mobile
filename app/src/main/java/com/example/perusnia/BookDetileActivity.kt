@@ -4,9 +4,12 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Html
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.perusnia.Model.DataX
+import com.example.perusnia.Model.DefaultResponse
 import com.example.perusnia.Model.RateBook_Response
+import com.example.perusnia.Model.bookResponse
 import com.example.perusnia.Retrofit.RetrofitClient
 import com.example.perusnia.storage.SharedPrefManager
 import com.like.LikeButton
@@ -43,7 +46,7 @@ class BookDetileActivity : AppCompatActivity() {
                 .into(GambarBukuGradient)
             judulBuku.text = book.judul
             Pengarang.text = book.author
-            TglUpload.text = book.createdAt
+            TglUpload.text = book.publicationDate
             RateBukuValue.text = "${book.rateBook}/5"
             ReadBookValue.text = "null"
             pageBookValue.text = "null"
@@ -70,6 +73,24 @@ class BookDetileActivity : AppCompatActivity() {
                     }
                 })
 
+            RetrofitClient.instance.getSpesificFavorite(id_users,book.idBook!!.toInt())
+                .enqueue(object : Callback<DefaultResponse?> {
+                    override fun onResponse(
+                        call: Call<DefaultResponse?>,
+                        response: Response<DefaultResponse?>
+                    ) {
+                        if (response.body()?.status!!.equals(200)){
+                            btn_favorite.setLiked(true)
+                        }
+                    }
+
+                    override fun onFailure(call: Call<DefaultResponse?>, t: Throwable) {
+                        TODO("Not yet implemented")
+                    }
+                })
+
+
+
         }
 
 
@@ -91,13 +112,49 @@ class BookDetileActivity : AppCompatActivity() {
             }
         }
 
+
+
         btn_favorite.setOnLikeListener(object : OnLikeListener {
             override fun liked(likeButton: LikeButton?) {
-                TODO("inset to favorite table")
+                RetrofitClient.instance.insertFavorite(id_users,book?.idBook!!.toInt())
+                    .enqueue(object : Callback<DefaultResponse?> {
+                        override fun onResponse(
+                            call: Call<DefaultResponse?>,
+                            response: Response<DefaultResponse?>
+                        ) {
+                            if (response.body()?.status!!.equals(200)){
+                                btn_favorite.setLiked(true)
+                                Toast.makeText(applicationContext,response.body()?.message,Toast.LENGTH_LONG).show()
+                            }else{
+                                Toast.makeText(applicationContext,response.body()?.message,Toast.LENGTH_LONG).show()
+                            }
+                        }
+
+                        override fun onFailure(call: Call<DefaultResponse?>, t: Throwable) {
+                            Toast.makeText(applicationContext,t.message,Toast.LENGTH_LONG).show()
+                        }
+                    })
             }
 
             override fun unLiked(likeButton: LikeButton?) {
-                TODO("update in rate table where id_rate_book=")
+                RetrofitClient.instance.deleteFavorite(id_users,book?.idBook!!.toInt())
+                    .enqueue(object : Callback<DefaultResponse?> {
+                        override fun onResponse(
+                            call: Call<DefaultResponse?>,
+                            response: Response<DefaultResponse?>
+                        ) {
+                            if (response.body()?.status!!.equals(200)){
+                                btn_favorite.setLiked(false)
+                                Toast.makeText(applicationContext,response.body()?.message,Toast.LENGTH_LONG).show()
+                            }else{
+                                Toast.makeText(applicationContext,response.body()?.message,Toast.LENGTH_LONG).show()
+                            }
+                        }
+
+                        override fun onFailure(call: Call<DefaultResponse?>, t: Throwable) {
+                            Toast.makeText(applicationContext,t.message,Toast.LENGTH_LONG).show()
+                        }
+                    })
             }
         })
 
