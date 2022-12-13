@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BookDetileActivity">
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -50,25 +55,29 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_alignParentTop="true"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginVertical="15dp">
 
                     <ImageView
                         android:id="@+id/btn_back"
+                        android:layout_weight="0"
+                        android:padding="15dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_baseline_arrow_back_24"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/judulBuku"
-                        app:tint="@color/black" />
+                        app:tint="@color/black"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackgroundBorderless"/>
 
                     <TextView
                         android:id="@+id/judulBuku"
-                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Judul Buku"
                         android:textAlignment="center"
@@ -82,15 +91,15 @@
 
                     <ImageView
                         android:id="@+id/imageView"
+                        android:layout_weight="0"
+                        android:padding="15dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_baseline_more_horiz_24"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/judulBuku"
                         app:tint="@color/black" />
 
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -213,7 +222,6 @@
                             app:layout_constraintBottom_toBottomOf="@+id/readLayout"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/readLayout">
-
                             <TextView
                                 android:id="@+id/pageBookValue"
                                 android:layout_width="wrap_content"
@@ -260,8 +268,112 @@
 
 
                 </LinearLayout>
-
+<!-- Feedback not null-->
                 <LinearLayout
+                    android:id="@+id/your_feedback_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:layout_marginVertical="15dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Your feedback"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:paddingVertical="15dp"
+                        android:textSize="16dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            app:cardCornerRadius="25dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_weight="0">
+                            <ImageView
+                                android:id="@+id/foto_feedback"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/default_image"/>
+                        </androidx.cardview.widget.CardView>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="1">
+                            <TextView
+                                android:id="@+id/name_feedback"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Your name"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+                                <RatingBar
+                                    android:id="@+id/rating_feedback"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:isIndicator="true"
+                                    android:theme="@style/RatingBar"
+                                    style="@style/Widget.AppCompat.RatingBar.Small"
+                                    android:layout_weight="0"
+                                    android:numStars="5"
+                                    />
+                                <TextView
+                                    android:id="@+id/tgl_feedback"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="10/06/2022"
+                                    android:gravity="right"
+                                    android:layout_weight="1" />
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3.5"
+                            android:gravity="center_horizontal">
+                            <ImageView
+                                android:id="@+id/btn_option_your_rate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_baseline_more_vert_24" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/feedback"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="4"
+                        android:ellipsize="end"
+                        android:text="Your feedback in 3 lines elipsed in last text"
+                        android:paddingVertical="10dp" />
+                    <TextView
+                        android:id="@+id/btn_edit_feedback"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/green"
+                        android:textStyle="bold"
+                        android:layout_marginVertical="5dp"
+                        android:textSize="15dp"
+                        android:text="Edit yout feedback"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackgroundBorderless"/>
+                    />
+                </LinearLayout>
+
+<!-- Feedback is null-->
+                <LinearLayout
+                    android:id="@+id/feedback_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -290,11 +402,10 @@
                         android:hint="Feedback"
                         app:boxBackgroundColor="@color/grey"
                         app:boxStrokeColor="@color/green"
-
                         >
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txtFedback"
+                            android:id="@+id/txtFeedback"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="top"
@@ -302,20 +413,59 @@
                             />
 
                     </com.google.android.material.textfield.TextInputLayout>
-                    <Button
-                        android:id="@+id/btn_feedback"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Send Feedback"
-                        android:layout_gravity="right"
-                        />
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal"
+                       android:gravity="right">
+                       <Button
+                           android:id="@+id/btn_cencel"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="Cancel"
+                           android:textColor="@color/black"
+                           android:backgroundTint="@color/grey"
+                           android:layout_marginRight="15dp"
+                           android:visibility="gone"
+                           />
+                       <Button
+                           android:id="@+id/btn_send_feedback"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="Send Feedback"
+                           />
+                       <Button
+                           android:id="@+id/btn_update_feedback"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="Update"
+                            android:visibility="gone"
+                           />
+
+                   </LinearLayout>
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Some feedback"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/feedback_book_item"
+                    android:layout_marginVertical="15dp"/>
 
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 <!--scrollview-->
 
     <LinearLayout
@@ -348,24 +498,27 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/open_pdf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
             app:cardBackgroundColor="@color/green"
             app:cardElevation="5dp"
             android:layout_marginLeft="15dp"
-            app:cardCornerRadius="15dp">
+            app:cardCornerRadius="15dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+            >
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@color/white"
-                android:text="Continue Reading"
+                android:text="Read this book"
                 android:textAlignment="center"
                 android:paddingVertical="15dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackgroundBorderless"/>
+                />
 
         </androidx.cardview.widget.CardView>
 

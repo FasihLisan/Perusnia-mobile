@@ -4,10 +4,9 @@ package com.example.perusnia.Model
 import com.google.gson.annotations.SerializedName
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
-import java.sql.Timestamp
 
 @Parcelize
-data class DataXXX(
+data class DataXX(
     @SerializedName("comment")
     val comment: String?,
     @SerializedName("created_at")

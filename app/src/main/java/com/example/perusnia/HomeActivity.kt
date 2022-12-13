@@ -72,11 +72,16 @@ class HomeActivity : AppCompatActivity() {
                     call: Call<userResponse?>,
                     response: Response<userResponse?>
                 ) {
-                    usernameHello.text = "Hello ${response.body()?.data!!.username}"
+                    val data = response.body()?.data
+                    if (data?.username != null){
+                        usernameHello.text = "Hello ${data?.username}"
+                    }else{
+                        usernameHello.text = "Hello Anonymous"
+                    }
                 }
 
                 override fun onFailure(call: Call<userResponse?>, t: Throwable) {
-                    usernameHello.text = "Hello Anonymous"
+                    Log.d("TAG",t.message.toString())
                 }
             })
 
@@ -136,7 +141,7 @@ class HomeActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<TopRatedBook_Response?>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    Toast.makeText(applicationContext,t.message.toString(),Toast.LENGTH_LONG).show()
                 }
             })
     }

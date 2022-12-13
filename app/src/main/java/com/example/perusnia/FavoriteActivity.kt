@@ -3,6 +3,8 @@ package com.example.perusnia
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,7 +15,9 @@ import com.example.perusnia.Retrofit.RetrofitClient
 import com.example.perusnia.adapter.FavoriteAdapter
 import com.example.perusnia.storage.SharedPrefManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_book_detile.*
 import kotlinx.android.synthetic.main.activity_favorite.*
+import kotlinx.android.synthetic.main.activity_favorite.recyclerview
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -91,13 +95,14 @@ class FavoriteActivity : AppCompatActivity() {
                     call: Call<bookResponse?>,
                     response: Response<bookResponse?>
                 ) {
-                    if (response.isSuccessful){
+                    if (response.body()?.status == 200){
                         showData(response.body()!!)
                     }
                 }
 
                 override fun onFailure(call: Call<bookResponse?>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    recyclerview.visibility = View.GONE
+                    Toast.makeText(applicationContext,"data not found",Toast.LENGTH_LONG).show()
                 }
             })
     }

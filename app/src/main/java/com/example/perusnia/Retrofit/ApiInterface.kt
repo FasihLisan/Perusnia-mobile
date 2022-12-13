@@ -5,14 +5,11 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.Field
-import retrofit2.http.FieldMap
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
-import retrofit2.http.HTTP
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 
@@ -70,6 +67,9 @@ interface ApiInterface {
     @GET("api/book.php?api_key=fasih123")
     fun getBook():Call<bookResponse>
 
+    /*
+    **  ------Rate Book API------
+    */
     @GET("api/getTopRateBook.php?api_key=fasih123")
     fun getTopRateBook():Call<TopRatedBook_Response>
 
@@ -78,7 +78,37 @@ interface ApiInterface {
         @Query("api_key")api_key:String,
         @Query("id_users")id_users:Int,
         @Query("id_book")id_book:Int
-    ):Call<RateBook_Response>
+    ):Call<SpesificRateBook_Response>
+
+    @GET("api/rateBook.php?api_key=fasih123")
+    fun getAllRateBook( @Query("id_book")id_book:Int):Call<BookRate_Response>
+
+    @FormUrlEncoded
+    @POST("api/insertFeedback.php?api_key=fasih123")
+    fun insertFeedback(
+        @Field("rate_score")rate_score:Float,
+        @Field("comment")comment:String,
+        @Field("id_book")id_book:Int,
+        @Field("id_users")id_users: Int,
+    ):Call<DefaultResponse>
+
+    @FormUrlEncoded
+    @POST("api/updateFeedback.php?api_key=fasih123")
+    fun updateFeedback(
+        @Query("id_book")id_book_params:Int,
+        @Query("id_users")id_users_params: Int,
+        @Field("rate_score")rate_score:Float,
+        @Field("comment")comment:String,
+        @Field("id_book")id_book:Int,
+        @Field("id_users")id_users: Int,
+    ):Call<DefaultResponse>
+
+    @GET("api/deleteFeedback.php?api_key=fasih123")
+    fun deleteFeedback(
+        @Query("id_book")id_book_params:Int,
+        @Query("id_users")id_users_params: Int,
+    ):Call<DefaultResponse>
+
 
 
     /*
@@ -102,7 +132,7 @@ interface ApiInterface {
     ):Call<DefaultResponse>
 
     @FormUrlEncoded
-    @HTTP(method = "DELETE", path = "api/deleteFavoriteBook.php?api_key=fasih123", hasBody = true)
+    @POST("api/deleteFavoriteBook.php?api_key=fasih123")
     fun deleteFavorite(
         @Field("id_users") id_users: Int,
         @Field("id_book") id_book: Int
@@ -112,6 +142,30 @@ interface ApiInterface {
     /*
     **  ------Note API------
     */
+
+    @GET("api/notes.php?api_key=fasih123")
+    fun getSpesificNote(@Query("id_users")id_users: Int):Call<noteResponse>
+
+    @FormUrlEncoded
+    @POST("api/insertNote.php?api_key=fasih123")
+    fun insertNote(
+        @Field("id_users") id_users: Int,
+        @Field("judul") judul: String,
+        @Field("isi") isi: String,
+    ): Call<DefaultResponse>
+
+    @FormUrlEncoded
+    @POST("api/updateNote.php?api_key=fasih123")
+    fun updateNote(
+        @Query("id_notes") id_notes:Int,
+        @Field("judul") judul: String,
+        @Field("isi") isi: String,
+    ): Call<DefaultResponse>
+
+    @GET("api/deleteNote.php?api_key=fasih123")
+    fun deleteNote(
+        @Query("id_notes") id_notes:Int,
+    ):Call<DefaultResponse>
 
     /*
     **  ------Other API------

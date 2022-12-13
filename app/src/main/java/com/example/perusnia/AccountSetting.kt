@@ -53,6 +53,7 @@ class AccountSetting : AppCompatActivity(), userUploadRequestBody.UploadCallback
         setContentView(R.layout.activity_account_setting)
         val sharedPrefManager = SharedPrefManager.getInstance(this).user
         val id_users = sharedPrefManager.id_users.toInt()
+
         val radio:RadioButton = findViewById(rGenderGroup.checkedRadioButtonId)
 
 
@@ -103,7 +104,7 @@ class AccountSetting : AppCompatActivity(), userUploadRequestBody.UploadCallback
 
                     try {
                         Picasso.get()
-                            .load("${RetrofitClient.BASE_URL}api/files.php?api_key=fasih123&file=${response.body()?.data!!.foto}")
+                            .load("${RetrofitClient.BASE_URL}api/files.php?api_key=fasih123&file=${response.body()?.data?.foto.toString()}")
                             .placeholder(R.drawable.default_image)
                             .error(R.drawable.ic_baseline_error_outline_24)
                             .into(profileImage)

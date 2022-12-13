@@ -6,9 +6,9 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class RateBook_Response(
+data class noteResponse(
     @SerializedName("data")
-    val `data`: DataXXX?,
+    val `data`: ArrayList<DataXXXX>?,
     @SerializedName("message")
     val message: String?,
     @SerializedName("status")

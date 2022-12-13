@@ -7,79 +7,43 @@
     tools:context=".NoteActivity"
     android:orientation="vertical">
 
+   <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="Your notes"
+           android:textSize="20sp"
+           android:textStyle="bold"
+           android:textColor="@color/black"
+           android:padding="15dp"/>
 
    <ScrollView
        android:layout_width="match_parent"
-       android:layout_height="wrap_content">
+       android:layout_height="wrap_content"
+       android:paddingHorizontal="15dp">
        <LinearLayout
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:orientation="vertical"
-           android:layout_margin="15dp">
-           <TextView
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:text="Your notes"
-               android:textSize="20sp"
-               android:textStyle="bold"
-               android:textColor="@color/black"
-               android:layout_marginBottom="20dp"/>
-           <androidx.cardview.widget.CardView
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               app:cardElevation="5dp"
-               android:layout_margin="10dp"
-               app:cardCornerRadius="15dp"
-               android:clickable="true"
-               android:focusable="true"
-               android:foreground="?android:attr/selectableItemBackgroundBorderless">
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:orientation="vertical"
-                   android:padding="15dp">
-                   <LinearLayout
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:orientation="horizontal"
-                       android:layout_marginBottom="10dp">
-                       <TextView
-                           android:layout_width="match_parent"
-                           android:layout_height="wrap_content"
-                           android:textStyle="bold"
-                           android:layout_weight="1"
-                           android:text="Title"
-                           android:textSize="20dp"
-                           android:maxLines="1"
-                           android:ellipsize="end"/>
+           android:paddingBottom="150dp">
 
-                   </LinearLayout>
-                   <LinearLayout
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:orientation="horizontal"
-                       android:layout_marginBottom="10dp">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:maxLines="4"
-                            android:ellipsize="end"
-                            android:textSize="15dp"
-                            android:text="Lorem ipsum dolor sit amet consectetur. Ante aliquam amet tempor posuere placerat pharetra viverra amet. Erat duis"/>
-                   </LinearLayout>
-                   <TextView
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:gravity="right|center"
-                       android:text="12 November 2022"
-                       android:textSize="10dp"/>
-               </LinearLayout>
-           </androidx.cardview.widget.CardView>
+
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/recyclerview"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               tools:listitem="@layout/note_item"
+               tools:itemCount="1"
+               android:scrollbars="none"/>
        </LinearLayout>
 
    </ScrollView>
-
+   </LinearLayout>
     <androidx.cardview.widget.CardView
+        android:id="@+id/btn_addNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/green"

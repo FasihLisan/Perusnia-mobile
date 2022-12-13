@@ -11,7 +11,7 @@
     <color name="green">#00A96C</color>
     <color name="yellow">#FFC107</color>
     <color name="red">#FF6262</color>
-
-
-
+    <color name="colorBoulder">#757575</color>
+    <color name="colorSilver">#CCCCCC</color>
+    <color name="colorAquaHaze">#F4F6F9</color>
 </resources>
