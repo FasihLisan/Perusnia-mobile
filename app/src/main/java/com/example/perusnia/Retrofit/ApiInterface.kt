@@ -67,6 +67,9 @@ interface ApiInterface {
     @GET("api/book.php?api_key=fasih123")
     fun getBook():Call<bookResponse>
 
+    @GET("api/searchBook.php?api_key=fasih123")
+    fun serachBook(@Query("keyword")keyword:String):Call<bookResponse>
+
     /*
     **  ------Rate Book API------
     */
@@ -168,6 +171,27 @@ interface ApiInterface {
     ):Call<DefaultResponse>
 
     /*
-    **  ------Other API------
+    **  ------Cart API------
     */
+    @GET("api/cart_item.php?api_key=fasih123")
+    fun getSpesificCart( @Query("id_users")id_users: Int):Call<bookResponse>
+
+    @FormUrlEncoded
+    @POST("api/cart_item.php?api_key=fasih123")
+    fun insertCart(
+        @Field("id_users") id_users: Int,
+        @Field("id_book") id_book: Int,
+    ): Call<DefaultResponse>
+
+    @GET("api/cart_item.php?api_key=fasih123")
+    fun deleteCart(
+        @Query("id_users") id_users: Int,
+        @Query("id_book") id_book: Int
+    ):Call<DefaultResponse>
+
+    @GET("api/cartTotal.php?api_key=fasih123")
+    fun getCartTotal(
+        @Query("id_users") id_users: Int,
+    ):Call<cartTotal_Response>
+
 }

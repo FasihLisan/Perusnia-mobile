@@ -1,27 +1,22 @@
 package com.example.perusnia.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.perusnia.Model.DataX
 import com.example.perusnia.R
 import com.example.perusnia.Retrofit.RetrofitClient
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_profile.*
-import kotlinx.android.synthetic.main.top_rated_book_item.view.*
+import kotlinx.android.synthetic.main.serach_result_item.view.*
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-
-class BookAdapter(val data: ArrayList<DataX>,val listener: OnAdapterListener):RecyclerView.Adapter<BookAdapter.ViewHolder>(){
+class SerachResult_Adapter(val data: ArrayList<DataX>, val listener: OnAdapterListener): RecyclerView.Adapter<SerachResult_Adapter.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder (
-        LayoutInflater.from(parent.context).inflate(R.layout.top_rated_book_item,parent,false)
+        LayoutInflater.from(parent.context).inflate(R.layout.serach_result_item,parent,false)
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -34,8 +29,8 @@ class BookAdapter(val data: ArrayList<DataX>,val listener: OnAdapterListener):Re
             .into(holder.view.GambarBuku)
         holder.view.judulBuku.text = book.judul
         holder.view.Pengarang.text = book.author
-       holder.view.Harga.text = if (book.harga!!.toInt() != 0) "Rp."+ NumberFormat.getNumberInstance(
-           Locale.US).format(book.harga!!.toInt()) else "Free"
+        holder.view.Harga.text = if (book.harga!!.toInt() != 0) "Rp."+ NumberFormat.getNumberInstance(
+            Locale.US).format(book.harga!!.toInt()) else "Free"
         holder.view.setOnClickListener{
             listener.onClick(book)
         }
@@ -43,7 +38,7 @@ class BookAdapter(val data: ArrayList<DataX>,val listener: OnAdapterListener):Re
 
     override fun getItemCount() = data.size
 
-    class ViewHolder(val view:View):RecyclerView.ViewHolder(view)
+    class ViewHolder(val view: View): RecyclerView.ViewHolder(view)
 
     fun setData(data2:List<DataX>){
         data.clear()
@@ -52,7 +47,7 @@ class BookAdapter(val data: ArrayList<DataX>,val listener: OnAdapterListener):Re
     }
 
     interface OnAdapterListener {
-        fun onClick( data:DataX )
+        fun onClick( data: DataX)
     }
 
 

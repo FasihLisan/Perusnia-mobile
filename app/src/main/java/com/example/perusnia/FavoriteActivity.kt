@@ -14,8 +14,6 @@ import com.example.perusnia.Model.bookResponse
 import com.example.perusnia.Retrofit.RetrofitClient
 import com.example.perusnia.adapter.FavoriteAdapter
 import com.example.perusnia.storage.SharedPrefManager
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_book_detile.*
 import kotlinx.android.synthetic.main.activity_favorite.*
 import kotlinx.android.synthetic.main.activity_favorite.recyclerview
 import retrofit2.Call
@@ -34,37 +32,9 @@ class FavoriteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_favorite)
 
-
-
-
-
-
-        //---------------navigation-----------------------------------
-        bottom_navigation.selectedItemId = R.id.favorite
-
-        // Perform item selected listener
-        bottom_navigation.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.favorite -> return@OnNavigationItemSelectedListener true
-                R.id.home -> {
-                    startActivity(Intent(applicationContext, HomeActivity::class.java))
-                    overridePendingTransition(0, 0)
-                    return@OnNavigationItemSelectedListener true
-                }
-                R.id.note -> {
-                    startActivity(Intent(applicationContext, NoteActivity::class.java))
-                    overridePendingTransition(0, 0)
-                    return@OnNavigationItemSelectedListener true
-                }
-                R.id.profile -> {
-                    startActivity(Intent(applicationContext, ProfileActivity::class.java))
-                    overridePendingTransition(0, 0)
-                    return@OnNavigationItemSelectedListener true
-                }
-            }
-            false
-        })
-        //--------------------navigation-----------------------------------
+        btn_back.setOnClickListener(){
+            finish()
+        }
     }
 
     override fun onStart() {

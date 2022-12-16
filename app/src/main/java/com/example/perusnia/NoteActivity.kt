@@ -42,8 +42,8 @@ class NoteActivity : AppCompatActivity() {
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }
-                R.id.favorite -> {
-                    startActivity(Intent(applicationContext, FavoriteActivity::class.java))
+                R.id.myBook -> {
+                    startActivity(Intent(applicationContext, MyBookActivity::class.java))
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }

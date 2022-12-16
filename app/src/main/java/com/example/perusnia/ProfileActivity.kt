@@ -65,6 +65,10 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(Intent(applicationContext,MainActivity::class.java))
         }
 
+        btn_favorite.setOnClickListener(){
+            startActivity(Intent(applicationContext,FavoriteActivity::class.java))
+        }
+
         bottom_navigation.selectedItemId = R.id.profile
 
         // Perform item selected listener
@@ -75,8 +79,8 @@ class ProfileActivity : AppCompatActivity() {
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }
-                R.id.favorite -> {
-                    startActivity(Intent(applicationContext, FavoriteActivity::class.java))
+                R.id.myBook -> {
+                    startActivity(Intent(applicationContext, MyBookActivity::class.java))
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }

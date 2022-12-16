@@ -23,8 +23,10 @@ import kotlinx.android.synthetic.main.activity_book_detile.recyclerview
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Collections
+import java.util.Locale
 import java.util.Random
 
 
@@ -59,10 +61,10 @@ class BookDetileActivity : AppCompatActivity() {
             judulBuku.text = book.judul
             Pengarang.text = book.author
             TglUpload.text = SimpleDateFormat("dd MMMM yyyy").format(SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(book.createdAt))
-            RateBukuValue.text = "${book.rateBook}/5"
-            ReadBookValue.text = "null"
-            pageBookValue.text = "null"
+            RateBukuValue.text = if(book.rateBook.isNullOrEmpty()) "-/5" else "${book.rateBook}/5"
+            pageBookValue.text = book.halaman
             sinopsisBuku.text = Html.fromHtml(Html.fromHtml(book.description).toString())
+            price.text = if (book.harga!!.toInt() != 0) "Rp."+NumberFormat.getNumberInstance(Locale.US).format(book.harga!!.toInt()) else "Free"
 
 
             RetrofitClient.instance.getSpesificRateBook("fasih123",id_users.toInt(),book.idBook!!.toInt())
@@ -311,13 +313,36 @@ class BookDetileActivity : AppCompatActivity() {
             }
         })
 
-       open_pdf.setOnClickListener {
+       btn_readBook.setOnClickListener {
            val intent = Intent(applicationContext,PdfViewActivity::class.java)
            intent.putExtra("pdf_url",book!!.fileBuku)
            intent.putExtra("pdf_title",book!!.judul)
            startActivity(intent)
        }
 
+        btn_addCart.setOnClickListener(){
+            RetrofitClient.instance.insertCart(book?.idUsers!!.toInt(),book?.idBook!!.toInt())
+                .enqueue(object : Callback<DefaultResponse?> {
+                    override fun onResponse(
+                        call: Call<DefaultResponse?>,
+                        response: Response<DefaultResponse?>,
+                    ) {
+                        if (response.isSuccessful){
+                            Toast.makeText(applicationContext,"Success add to cart",Toast.LENGTH_LONG).show()
+                        }else{
+                            Toast.makeText(applicationContext,"Book alredy in cart",Toast.LENGTH_LONG).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<DefaultResponse?>, t: Throwable) {
+                        Toast.makeText(applicationContext,t.message.toString(),Toast.LENGTH_LONG).show()
+                    }
+                })
+        }
+
+        btn_buynNow.setOnClickListener(){
+            TODO("langusng Cehckout")
+        }
 
         setupRecylerView()
         getDataFromAPI(book?.idBook!!.toInt())

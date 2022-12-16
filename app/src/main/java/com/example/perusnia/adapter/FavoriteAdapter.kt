@@ -9,6 +9,14 @@ import com.example.perusnia.R
 import com.example.perusnia.Retrofit.RetrofitClient
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.favorite_book_item.view.*
+import kotlinx.android.synthetic.main.favorite_book_item.view.GambarBuku
+import kotlinx.android.synthetic.main.favorite_book_item.view.Harga
+import kotlinx.android.synthetic.main.favorite_book_item.view.Pengarang
+import kotlinx.android.synthetic.main.favorite_book_item.view.judulBuku
+import kotlinx.android.synthetic.main.top_rated_book_item.view.*
+import java.text.NumberFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class FavoriteAdapter(val data: ArrayList<DataX>,val listener: OnAdapterListener): RecyclerView.Adapter<FavoriteAdapter.ViewHolder>(){
 
@@ -26,11 +34,8 @@ class FavoriteAdapter(val data: ArrayList<DataX>,val listener: OnAdapterListener
             .into(holder.view.GambarBuku)
         holder.view.judulBuku.text = book.judul
         holder.view.Pengarang.text = book.author
-        if (book.harga!!.toInt() < 1){
-            holder.view.Harga.text = "Free"
-        }else{
-            holder.view.Harga.text = "Rp."+book.harga.toString()
-        }
+        holder.view.Harga.text = if (book.harga!!.toInt() != 0) "Rp."+ NumberFormat.getNumberInstance(
+            Locale.US).format(book.harga!!.toInt()) else "Free"
         holder.view.setOnClickListener{
             listener.onClick(book)
         }

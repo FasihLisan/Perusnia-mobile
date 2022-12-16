@@ -9,6 +9,8 @@ import com.example.perusnia.Model.bookResponse
 import com.example.perusnia.Retrofit.RetrofitClient
 import com.example.perusnia.adapter.BookAdapter
 import kotlinx.android.synthetic.main.activity_book.*
+import kotlinx.android.synthetic.main.activity_book.btn_back
+import kotlinx.android.synthetic.main.activity_book.btn_search
 import kotlinx.android.synthetic.main.activity_book.recyclerview
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,6 +26,14 @@ class BookActivity : AppCompatActivity() {
 
         btn_back.setOnClickListener {
             finish()
+        }
+
+        btn_search.setOnClickListener(){
+            val key = keyword.text.toString()
+            startActivity(
+                Intent(applicationContext,SerachResult_Activity::class.java)
+                    .putExtra("keyword",key)
+            )
         }
     }
 

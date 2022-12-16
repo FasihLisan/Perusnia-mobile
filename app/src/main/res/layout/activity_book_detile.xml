@@ -22,7 +22,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="100dp">
+            android:paddingBottom="150dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -141,106 +141,87 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <androidx.cardview.widget.CardView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="25dp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="15dp"
-                    app:cardElevation="5dp"
-                    app:contentPadding="15dp"
-                    app:contentPaddingLeft="30dp"
-                    app:contentPaddingRight="30dp">
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="25dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="15dp"
+                        app:cardElevation="5dp"
+                        app:contentPadding="15dp"
+                        app:contentPaddingLeft="30dp"
+                        app:contentPaddingRight="30dp">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical|center"
-                        android:orientation="horizontal">
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical|center"
+                            android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:id="@+id/rateLayout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            app:layout_constraintBottom_toBottomOf="@+id/readLayout"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/readLayout">
-
-                            <ImageView
+                            <LinearLayout
+                                android:id="@+id/rateLayout"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_baseline_star_24"
-                                app:tint="@color/yellow" />
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:paddingRight="100dp"
+                                app:layout_constraintBottom_toBottomOf="@+id/pageBookLayout"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/pageBookLayout">
 
-                            <TextView
-                                android:id="@+id/RateBukuValue"
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_baseline_star_24"
+                                    app:tint="@color/yellow" />
+
+                                <TextView
+                                    android:id="@+id/RateBukuValue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="4.8/5"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+
+
+                            <LinearLayout
+                                android:id="@+id/pageBookLayout"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="4.8/5"
-                                android:textStyle="bold" />
-                        </LinearLayout>
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                app:layout_constraintBottom_toBottomOf="@+id/rateLayout"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/rateLayout">
+                                <TextView
+                                    android:id="@+id/pageBookValue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="200"
+                                    android:textColor="@color/black"
+                                    android:textStyle="bold" />
 
-                        <LinearLayout
-                            android:id="@+id/readLayout"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:orientation="horizontal"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/pageBookLayout"
-                            app:layout_constraintStart_toEndOf="@+id/rateLayout"
-                            app:layout_constraintTop_toTopOf="parent">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="2dp"
+                                    android:text="Page"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
 
-                            <TextView
-                                android:id="@+id/ReadBookValue"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="2,5k"
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="2dp"
-                                android:text="Read"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/pageBookLayout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            app:layout_constraintBottom_toBottomOf="@+id/readLayout"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/readLayout">
-                            <TextView
-                                android:id="@+id/pageBookValue"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="200"
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="2dp"
-                                android:text="Page"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.cardview.widget.CardView>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -472,20 +453,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:paddingHorizontal="25dp"
         android:paddingVertical="15dp"
         android:background="@color/white">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="15dp">
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rp. 45.000"
+                android:textStyle="bold"
+                android:textSize="23dp"
+                android:textColor="@color/green"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
             app:cardBackgroundColor="@color/grey"
-            app:cardElevation="5dp">
+            app:cardElevation="5dp"
+            android:layout_marginRight="15dp">
             <com.like.LikeButton
                 android:id="@+id/btn_favorite"
                 app:icon_type="heart"
@@ -495,10 +496,53 @@
                 android:padding="10dp" />
         </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btn_addCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            app:cardBackgroundColor="@color/grey"
+            app:cardElevation="3dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_shopping_cart_30"
+                app:tint="@color/dark4"
+                android:padding="10dp" />
+        </androidx.cardview.widget.CardView>
+
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/open_pdf"
+            android:id="@+id/btn_readBook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            app:cardBackgroundColor="@color/green"
+            app:cardElevation="5dp"
+            android:layout_marginLeft="15dp"
+            app:cardCornerRadius="15dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+            android:visibility="gone"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/white"
+                android:text="Buy now"
+                android:textAlignment="center"
+                android:paddingVertical="15dp"
+                />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btn_buynNow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
@@ -510,17 +554,17 @@
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackgroundBorderless"
             >
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@color/white"
-                android:text="Read this book"
+                android:text="Buy now"
                 android:textAlignment="center"
                 android:paddingVertical="15dp"
                 />
 
         </androidx.cardview.widget.CardView>
 
+        </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

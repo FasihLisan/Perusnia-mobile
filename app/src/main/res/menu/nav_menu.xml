@@ -4,9 +4,9 @@
         android:title="Home"
         android:icon="@drawable/ic_baseline_home_24"
         />
-    <item android:id="@+id/favorite"
-        android:title="Favorite"
-        android:icon="@drawable/ic_baseline_favorite_24"
+    <item android:id="@+id/myBook"
+        android:title="My Book"
+        android:icon="@drawable/ic_baseline_menu_book_24"
         />
     <item android:id="@+id/note"
         android:title="Note"

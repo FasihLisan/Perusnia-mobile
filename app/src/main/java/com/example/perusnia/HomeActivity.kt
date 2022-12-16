@@ -5,12 +5,15 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.perusnia.Model.DataX
 import com.example.perusnia.Model.TopRatedBook_Response
+import com.example.perusnia.Model.cartTotal_Response
 import com.example.perusnia.Model.userResponse
 import com.example.perusnia.Retrofit.RetrofitClient
 import com.example.perusnia.adapter.TopRatedBook_Adapter
@@ -19,6 +22,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.activity_home.recyclerview
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,6 +31,7 @@ import retrofit2.Response
 class HomeActivity : AppCompatActivity() {
 
     lateinit var topratedbookAdapter: TopRatedBook_Adapter
+    lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,8 +51,8 @@ class HomeActivity : AppCompatActivity() {
         bottom_navigation.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> return@OnNavigationItemSelectedListener true
-                R.id.favorite -> {
-                    startActivity(Intent(applicationContext, FavoriteActivity::class.java))
+                R.id.myBook -> {
+                    startActivity(Intent(applicationContext, MyBookActivity::class.java))
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }
@@ -95,6 +100,35 @@ class HomeActivity : AppCompatActivity() {
         }
         btn_search.setOnClickListener(){
             showdialogSearch()
+        }
+        RetrofitClient.instance.getCartTotal(id_users)
+            .enqueue(object : Callback<cartTotal_Response?> {
+                override fun onResponse(
+                    call: Call<cartTotal_Response?>,
+                    response: Response<cartTotal_Response?>,
+                ) {
+                    if (response.body()?.status == 200){
+                        cartItemBadge.visibility = View.VISIBLE
+                        cartItemCount.text = response.body()!!.data!!.totalItem
+                    }else{
+                        cartItemBadge.visibility = View.GONE
+                    }
+                }
+
+                override fun onFailure(call: Call<cartTotal_Response?>, t: Throwable) {
+                    cartItemBadge.visibility = View.GONE
+                }
+            })
+
+        swipeRefreshLayout = refreshLayout
+        swipeRefreshLayout.setOnRefreshListener {
+            // on below line we are setting is refreshing to false.
+            overridePendingTransition(0, 0);
+            finish();
+            overridePendingTransition(0, 0);
+            startActivity(getIntent());
+            overridePendingTransition(0, 0);
+            swipeRefreshLayout.isRefreshing = false
         }
     }
 
@@ -162,7 +196,10 @@ class HomeActivity : AppCompatActivity() {
             .setView(inputForm,70,0,70,0)
             .setPositiveButton("Search") { dialog, which ->
                 val input = inputForm.text.toString()
-                Toast.makeText(applicationContext,"Value is $input",Toast.LENGTH_LONG).show()
+                startActivity(
+                    Intent(applicationContext,SerachResult_Activity::class.java)
+                        .putExtra("keyword",input)
+                )
             }
             .setNegativeButton("Cancel") { dialog, which ->
                 dialog.dismiss()

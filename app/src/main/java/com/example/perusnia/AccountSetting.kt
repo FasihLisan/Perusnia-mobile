@@ -271,7 +271,7 @@ class AccountSetting : AppCompatActivity(), userUploadRequestBody.UploadCallback
     }
 
     private fun uploadImage(id_users:Int, username:String, email:String, passwordVerif:String, nama_Depan:String, nama_belakang:String, tgl_lahir:String, jenis_kelamin:String, no_telp:String, alamat:String, negara:String, kota:String){
-        if (selectedImageUri == null){
+        if (selectedImageUri != null){
             layout_root.snackbar("Select an image first")
             return
         }

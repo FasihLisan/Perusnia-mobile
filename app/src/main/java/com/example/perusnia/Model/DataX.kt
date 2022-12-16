@@ -21,6 +21,8 @@ data class DataX(
     val email: String?,
     @SerializedName("file_buku")
     val fileBuku: String?,
+    @SerializedName("halaman")
+    val halaman: String?,
     @SerializedName("foto")
     val foto: String?,
     @SerializedName("harga")
