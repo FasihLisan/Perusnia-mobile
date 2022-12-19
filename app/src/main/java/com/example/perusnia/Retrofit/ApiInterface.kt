@@ -59,6 +59,23 @@ interface ApiInterface {
         @Part("kota")kota:RequestBody,
     ): Call<DefaultResponse>
 
+    @Multipart
+    @POST("api/userUpdate.php?api_key=fasih123")
+    fun userUpdateNoImage(
+        @Query("id_users")id_users:Int,
+        @Part("username")username:RequestBody,
+        @Part("email")email:RequestBody,
+        @Part("password")password:RequestBody,
+        @Part("nama_depan")nama_depan:RequestBody,
+        @Part("nama_belakang")nama_belakang:RequestBody,
+        @Part("tgl_lahir")tgl_lahir:RequestBody,
+        @Part("jenis_kelamin")jenis_kelamin:RequestBody,
+        @Part("no_telp")no_telp:RequestBody,
+        @Part("alamat")alamat:RequestBody,
+        @Part("negara")negara:RequestBody,
+        @Part("kota")kota:RequestBody,
+    ): Call<DefaultResponse>
+
 
     /*
     **  ------Book API------
@@ -193,5 +210,18 @@ interface ApiInterface {
     fun getCartTotal(
         @Query("id_users") id_users: Int,
     ):Call<cartTotal_Response>
+
+    @GET("api/deleteAllCartUsers.php?api_key=fasih123")
+    fun deleteAllCartUsers(
+        @Query("id_users") id_users: Int,
+    ):Call<cartTotal_Response>
+
+    @FormUrlEncoded
+    @POST("api/insertDetaileTransaction.php?api_key=fasih123")
+    fun insertDetaileTransaction(
+        @Field("transaction_id") transaction_id: String,
+        @Field("id_users") id_users: Int,
+        @Field("id_book") id_book: Int,
+        ): Call<DefaultResponse>
 
 }

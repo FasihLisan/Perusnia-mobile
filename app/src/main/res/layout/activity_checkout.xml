@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CheckoutActivity">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="15dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
+                <ImageView
+                    android:id="@+id/btn_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_baseline_arrow_back_24"
+                    app:tint="@color/black"
+                    android:padding="5dp"
+                    android:layout_marginRight="10dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Checkout"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:gravity="center_vertical"/>
+            </LinearLayout>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="vertical">
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:text="Customer detile"
+                       android:textStyle="bold"
+                       android:textColor="@color/black"/>
+                   <View
+                       android:background="@color/black"
+                       android:backgroundTint="@color/grey1"
+                       android:layout_marginVertical="5dp"
+                       android:outlineAmbientShadowColor="@color/black"
+                       android:layout_width="match_parent"
+                       android:layout_height="1px" />
+
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal">
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="Email: "
+                           android:layout_weight="0"/>
+                       <TextView
+                           android:id="@+id/email"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="fassihullisan091966@gmail.com"
+                           android:layout_weight="1"
+                           android:gravity="left"/>
+                   </LinearLayout>
+
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal">
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="Firstname: "
+                           android:layout_weight="0"/>
+                       <TextView
+                           android:id="@+id/fisrtname"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="achmad fasihul"
+                           android:layout_weight="1"
+                           android:gravity="left"/>
+                   </LinearLayout>
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal">
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="Lastname: "
+                           android:layout_weight="0"/>
+                       <TextView
+                           android:id="@+id/lastname"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="lisan"
+                           android:layout_weight="1"
+                           android:gravity="left"/>
+                   </LinearLayout>
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal">
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="Phone: "
+                           android:layout_weight="0"/>
+                       <TextView
+                           android:id="@+id/phone"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="085336076077"
+                           android:layout_weight="1"
+                           android:gravity="left"/>
+                   </LinearLayout>
+
+
+                   <View
+                       android:background="@color/black"
+                       android:backgroundTint="@color/grey1"
+                       android:outlineAmbientShadowColor="@color/black"
+                       android:layout_width="match_parent"
+                       android:layout_height="1px" />
+
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:text="Detile Item"
+                       android:textStyle="bold"
+                       android:textColor="@color/black"
+                       android:layout_marginTop="20dp"/>
+                   <View
+                       android:background="@color/black"
+                       android:backgroundTint="@color/grey1"
+                       android:layout_marginVertical="5dp"
+                       android:outlineAmbientShadowColor="@color/black"
+                       android:layout_width="match_parent"
+                       android:layout_height="1px" />
+                   <androidx.recyclerview.widget.RecyclerView
+                       android:id="@+id/recyclerview"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       tools:listitem="@layout/checkout_item_detile"
+                       tools:itemCount="2"/>
+
+
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:text="Rincian pembayran"
+                       android:textStyle="bold"
+                       android:textColor="@color/black"
+                       android:layout_marginTop="20dp"/>
+                   <View
+                       android:background="@color/black"
+                       android:backgroundTint="@color/grey1"
+                       android:layout_marginVertical="5dp"
+                       android:outlineAmbientShadowColor="@color/black"
+                       android:layout_width="match_parent"
+                       android:layout_height="1px" />
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal">
+                       <TextView
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:text="Subtotal item "
+                           android:layout_weight="1"/>
+                       <TextView
+                           android:id="@+id/subtotal_item"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:text="Rp. 90.000"
+                           android:layout_weight="1"
+                           android:gravity="right"/>
+                   </LinearLayout>
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal">
+                       <TextView
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:text="Subtotal diskon"
+                           android:layout_weight="1"/>
+                       <TextView
+                           android:id="@+id/subtotal_diskon"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:text="Rp.0"
+                           android:layout_weight="1"
+                           android:gravity="right"/>
+                   </LinearLayout>
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal">
+                       <TextView
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:textColor="@color/black"
+                           android:textSize="16dp"
+                           android:text="Total Pembayaran"
+                           android:layout_weight="1"/>
+                       <TextView
+                           android:id="@+id/total_pembayran"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:text="Rp. 90.000"
+                           android:layout_weight="1"
+                           android:textColor="@color/green"
+                           android:textSize="16dp"
+                           android:gravity="right"
+                           />
+                   </LinearLayout>
+
+
+               </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:padding="15dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/total_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TOTAL() ITEMS)"/>
+            <TextView
+                android:id="@+id/total_harga"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp. "
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btn_bayar"
+            android:layout_width="500dp"
+            android:layout_height="match_parent"
+            android:padding="20dp"
+            app:cardBackgroundColor="@color/green"
+            android:layout_weight="1.5"
+            app:cardCornerRadius="20dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless">>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Bayar sekarang"
+                    android:textColor="@color/white"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:layout_weight="1"
+                    android:textSize="15dp"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:src="@drawable/bi_arrow_right"
+                    android:layout_weight="2"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</RelativeLayout>

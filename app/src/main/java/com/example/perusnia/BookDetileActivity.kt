@@ -321,7 +321,7 @@ class BookDetileActivity : AppCompatActivity() {
        }
 
         btn_addCart.setOnClickListener(){
-            RetrofitClient.instance.insertCart(book?.idUsers!!.toInt(),book?.idBook!!.toInt())
+            RetrofitClient.instance.insertCart(id_users,book?.idBook!!.toInt())
                 .enqueue(object : Callback<DefaultResponse?> {
                     override fun onResponse(
                         call: Call<DefaultResponse?>,

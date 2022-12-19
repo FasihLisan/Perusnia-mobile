@@ -28,8 +28,6 @@ import kotlinx.android.synthetic.main.activity_account_setting.txtLastname
 import kotlinx.android.synthetic.main.activity_account_setting.txtPassword
 import kotlinx.android.synthetic.main.activity_account_setting.txtPasswordVerification
 import kotlinx.android.synthetic.main.activity_account_setting.txtUsername
-import kotlinx.android.synthetic.main.activity_profile.*
-import kotlinx.android.synthetic.main.activity_signup.*
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -53,9 +51,6 @@ class AccountSetting : AppCompatActivity(), userUploadRequestBody.UploadCallback
         setContentView(R.layout.activity_account_setting)
         val sharedPrefManager = SharedPrefManager.getInstance(this).user
         val id_users = sharedPrefManager.id_users.toInt()
-
-        val radio:RadioButton = findViewById(rGenderGroup.checkedRadioButtonId)
-
 
 
         RetrofitClient.instance.getSpesificUser(id_users)
@@ -144,6 +139,7 @@ class AccountSetting : AppCompatActivity(), userUploadRequestBody.UploadCallback
 
 
         btn_save.setOnClickListener {
+            val radio:RadioButton = findViewById(rGenderGroup.checkedRadioButtonId)
             var username = txtUsername.text.toString()
             var email = txtEmail.text.toString()
             var password = txtPassword.text.toString()
@@ -206,6 +202,7 @@ class AccountSetting : AppCompatActivity(), userUploadRequestBody.UploadCallback
             uploadImage(id_users,username,email,passwordVerif,nama_Depan,nama_belakang,tgl_lahir,jenis_kelamin,no_telp,alamat,negara,kota)
         }
         btn_save2.setOnClickListener {
+            val radio:RadioButton = findViewById(rGenderGroup.checkedRadioButtonId)
             var username = txtUsername.text.toString()
             var email = txtEmail.text.toString()
             var password = txtPassword.text.toString()
@@ -272,53 +269,85 @@ class AccountSetting : AppCompatActivity(), userUploadRequestBody.UploadCallback
 
     private fun uploadImage(id_users:Int, username:String, email:String, passwordVerif:String, nama_Depan:String, nama_belakang:String, tgl_lahir:String, jenis_kelamin:String, no_telp:String, alamat:String, negara:String, kota:String){
         if (selectedImageUri != null){
-            layout_root.snackbar("Select an image first")
-            return
+            val parcelFileDescriptor =
+                contentResolver.openFileDescriptor(selectedImageUri!!, "r", null) ?: return
+
+
+            val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
+            val file = File(cacheDir, contentResolver.getFileName(selectedImageUri!!))
+            val outputStream = FileOutputStream(file)
+            inputStream.copyTo(outputStream)
+
+            progress_bar.progress = 0
+            val body = userUploadRequestBody(file, "image", this)
+
+            RetrofitClient.instance.userUpdate(
+                id_users,
+                MultipartBody.Part.createFormData("foto", file.name, body),
+                RequestBody.create("multipart/form-data".toMediaTypeOrNull(),username),
+                RequestBody.create("multipart/form-data".toMediaTypeOrNull(),email),
+                RequestBody.create("multipart/form-data".toMediaTypeOrNull(),passwordVerif),
+                RequestBody.create("multipart/form-data".toMediaTypeOrNull(),nama_Depan),
+                RequestBody.create("multipart/form-data".toMediaTypeOrNull(),nama_belakang),
+                RequestBody.create("multipart/form-data".toMediaTypeOrNull(),tgl_lahir),
+                RequestBody.create("multipart/form-data".toMediaTypeOrNull(),jenis_kelamin),
+                RequestBody.create("multipart/form-data".toMediaTypeOrNull(),no_telp),
+                RequestBody.create("multipart/form-data".toMediaTypeOrNull(),alamat),
+                RequestBody.create("multipart/form-data".toMediaTypeOrNull(),negara),
+                RequestBody.create("multipart/form-data".toMediaTypeOrNull(),kota),
+            ).enqueue(object : Callback<DefaultResponse?> {
+                override fun onResponse(
+                    call: Call<DefaultResponse?>,
+                    response: Response<DefaultResponse?>
+                ) {
+                    response.body()?.let {
+                        layout_root.snackbar(it.message)
+                        progress_bar.progress = 100
+//               startActivity(Intent(applicationContext,AccountSetting::class.java))
+                    }
+                }
+
+                override fun onFailure(call: Call<DefaultResponse?>, t: Throwable) {
+                    layout_root.snackbar(t.message!!)
+                    progress_bar.progress = 0
+                }
+            })
+
+        }else{
+            progress_bar.progress = 0
+            RetrofitClient.instance.userUpdateNoImage(
+                id_users,
+                RequestBody.create("multipart/form-data".toMediaTypeOrNull(),username),
+                RequestBody.create("multipart/form-data".toMediaTypeOrNull(),email),
+                RequestBody.create("multipart/form-data".toMediaTypeOrNull(),passwordVerif),
+                RequestBody.create("multipart/form-data".toMediaTypeOrNull(),nama_Depan),
+                RequestBody.create("multipart/form-data".toMediaTypeOrNull(),nama_belakang),
+                RequestBody.create("multipart/form-data".toMediaTypeOrNull(),tgl_lahir),
+                RequestBody.create("multipart/form-data".toMediaTypeOrNull(),jenis_kelamin),
+                RequestBody.create("multipart/form-data".toMediaTypeOrNull(),no_telp),
+                RequestBody.create("multipart/form-data".toMediaTypeOrNull(),alamat),
+                RequestBody.create("multipart/form-data".toMediaTypeOrNull(),negara),
+                RequestBody.create("multipart/form-data".toMediaTypeOrNull(),kota),
+            ).enqueue(object : Callback<DefaultResponse?> {
+                override fun onResponse(
+                    call: Call<DefaultResponse?>,
+                    response: Response<DefaultResponse?>
+                ) {
+                    response.body()?.let {
+                        layout_root.snackbar(it.message)
+                        progress_bar.progress = 100
+//               startActivity(Intent(applicationContext,AccountSetting::class.java))
+                    }
+                }
+
+                override fun onFailure(call: Call<DefaultResponse?>, t: Throwable) {
+                    layout_root.snackbar(t.message!!)
+                    progress_bar.progress = 0
+                }
+            })
         }
 
-        val parcelFileDescriptor =
-            contentResolver.openFileDescriptor(selectedImageUri!!, "r", null) ?: return
 
-
-        val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
-        val file = File(cacheDir, contentResolver.getFileName(selectedImageUri!!))
-        val outputStream = FileOutputStream(file)
-        inputStream.copyTo(outputStream)
-
-        progress_bar.progress = 0
-        val body = userUploadRequestBody(file, "image", this)
-
-        RetrofitClient.instance.userUpdate(
-            id_users,
-            MultipartBody.Part.createFormData("foto", file.name, body),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(),username),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(),email),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(),passwordVerif),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(),nama_Depan),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(),nama_belakang),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(),tgl_lahir),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(),jenis_kelamin),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(),no_telp),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(),alamat),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(),negara),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(),kota),
-            ).enqueue(object : Callback<DefaultResponse?> {
-            override fun onResponse(
-                call: Call<DefaultResponse?>,
-                response: Response<DefaultResponse?>
-            ) {
-                response.body()?.let {
-                    layout_root.snackbar(it.message)
-                    progress_bar.progress = 100
-//               startActivity(Intent(applicationContext,AccountSetting::class.java))
-                }
-            }
-
-            override fun onFailure(call: Call<DefaultResponse?>, t: Throwable) {
-                layout_root.snackbar(t.message!!)
-                progress_bar.progress = 0
-            }
-        })
 
     }
 
