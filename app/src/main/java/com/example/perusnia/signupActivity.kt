@@ -38,9 +38,20 @@ class signupActivity : AppCompatActivity() {
             val jenis_kelamin = radio.text.toString()
             val negara = txtCountry.text.toString()
             val kota = txtCity.text.toString()
+            val regex = Regex("^[a-zA-Z0-9](_(?!(\\.|_))|\\.(?!(_|\\.))|[a-zA-Z0-9]){6,18}[a-zA-Z0-9]\$")
 
             if (username.isEmpty()){
                 txtUsername.error = "Username required"
+                txtUsername.requestFocus()
+                return@setOnClickListener
+            }
+            if (username.length < 5){
+                txtUsername.error = "Minimal 5 karakter"
+                txtUsername.requestFocus()
+                return@setOnClickListener
+            }
+            if (!regex.containsMatchIn(username)){
+                txtUsername.error = "min 6,max 18 alpahnumeric"
                 txtUsername.requestFocus()
                 return@setOnClickListener
             }

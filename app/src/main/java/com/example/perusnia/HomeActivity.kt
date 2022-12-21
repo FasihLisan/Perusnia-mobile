@@ -11,27 +11,31 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.perusnia.Model.DataX
-import com.example.perusnia.Model.TopRatedBook_Response
-import com.example.perusnia.Model.cartTotal_Response
-import com.example.perusnia.Model.userResponse
+import com.example.perusnia.Model.*
 import com.example.perusnia.Retrofit.RetrofitClient
 import com.example.perusnia.adapter.TopRatedBook_Adapter
 import com.example.perusnia.storage.SharedPrefManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_book.*
+import kotlinx.android.synthetic.main.activity_book_detile.*
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.activity_home.btn_search
 import kotlinx.android.synthetic.main.activity_home.recyclerview
+import kotlinx.android.synthetic.main.activity_home.refreshLayout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.math.log
 
 
 class HomeActivity : AppCompatActivity() {
 
     lateinit var topratedbookAdapter: TopRatedBook_Adapter
     lateinit var swipeRefreshLayout: SwipeRefreshLayout
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +44,74 @@ class HomeActivity : AppCompatActivity() {
         val sharedPrefManager = SharedPrefManager.getInstance(this).user
         val id_users = sharedPrefManager.id_users.toInt()
 
+        RetrofitClient.instance.getLogUserRead(id_users)//---------------------- response
+            .enqueue(object : Callback<singleBookResponse?> {
+                override fun onResponse(
+                    call: Call<singleBookResponse?>,
+                    response: Response<singleBookResponse?>,
+                ) {
+                    if (response.body()?.status == 200){
+                        val data = response.body()?.data!!
+                        btn_log_user_read.visibility = View.VISIBLE
+                        message_log_user_read.setText("Ini Buku terakhir yang anda baca!!, apakah sudah selesai di baca?")
+
+                        btn_log_user_read.setOnClickListener(){
+                            RetrofitClient.instance.getSpesificBook(10)//--------------------------- response 1
+                                .enqueue(object : Callback<bookResponse?> {
+                                    override fun onResponse(
+                                        call: Call<bookResponse?>,
+                                        response1: Response<bookResponse?>,
+                                    ) {
+                                        if (response1.isSuccessful){
+
+                                            RetrofitClient.instance.getSpesificUser(id_users)//------------------- response 2
+                                                .enqueue(object : Callback<userResponse?> {
+                                                    override fun onResponse(
+                                                        call: Call<userResponse?>,
+                                                        response2: Response<userResponse?>,
+                                                    ) {
+                                                        val users = response2.body()!!.data
+
+                                                        startActivity(
+                                                            Intent(applicationContext,BookDetileActivity::class.java)
+                                                                .putExtra("book", response1.body()?.data?.get(0))
+                                                                .putExtra("users",users)
+                                                        )
+                                                    }
+
+                                                    override fun onFailure(call: Call<userResponse?>, t: Throwable) {
+
+                                                    }
+                                                })
+
+
+                                        }
+                                    }
+
+                                    override fun onFailure(
+                                        call: Call<bookResponse?>,
+                                        t: Throwable,
+                                    ) {
+                                        Toast.makeText(applicationContext,t.message, Toast.LENGTH_LONG).show()
+                                    }
+                                })
+                        }
+
+                        layout_book_detile.visibility = View.VISIBLE
+                        Picasso.get()
+                            .load("${RetrofitClient.BASE_URL}api/files.php?api_key=fasih123&file=${data.cover}")
+                            .placeholder(R.drawable.default_image)
+                            .error(R.drawable.default_image)
+                            .into(image_log_user_read)
+                        juduBook_log_user_read.setText(data.judul)
+                        pengarang_log_user_read.setText(data.author)
+                    }
+                }
+
+                override fun onFailure(call: Call<singleBookResponse?>, t: Throwable) {
+                    Toast.makeText(applicationContext,t.message, Toast.LENGTH_LONG).show()
+                }
+            })
 
 
 
@@ -130,6 +202,9 @@ class HomeActivity : AppCompatActivity() {
             overridePendingTransition(0, 0);
             swipeRefreshLayout.isRefreshing = false
         }
+
+        setupRecylerView(id_users)
+        getDataFromAPI()
     }
 
     override fun onStart() { // code ayng di jalankan di awal atau menggunakan init{}
@@ -142,19 +217,33 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        setupRecylerView()
-        getDataFromAPI()
+
     }
 
-    private fun setupRecylerView(){
+    private fun setupRecylerView(id_users:Int){
         topratedbookAdapter = TopRatedBook_Adapter(arrayListOf(),object : TopRatedBook_Adapter.OnAdapterListener{
             override fun onClick(data: DataX) {
-               startActivity(
-                   Intent(applicationContext,BookDetileActivity::class.java)
-                       .putExtra("book",data)
-               )
-            }
 
+                RetrofitClient.instance.getSpesificUser(id_users)
+                    .enqueue(object : Callback<userResponse?> {
+                        override fun onResponse(
+                            call: Call<userResponse?>,
+                            response: Response<userResponse?>,
+                        ) {
+                            val users = response.body()!!.data
+                            startActivity(
+                                Intent(applicationContext,BookDetileActivity::class.java)
+                                    .putExtra("book",data)
+                                    .putExtra("users",users)
+                            )
+                        }
+
+                        override fun onFailure(call: Call<userResponse?>, t: Throwable) {
+
+                        }
+                    })
+
+            }
         })
         recyclerview.apply {
             layoutManager = LinearLayoutManager(applicationContext,RecyclerView.HORIZONTAL,false)
@@ -169,13 +258,17 @@ class HomeActivity : AppCompatActivity() {
                     call: Call<TopRatedBook_Response?>,
                     response: Response<TopRatedBook_Response?>
                 ) {
-                    if (response.isSuccessful){
+                    if (response.body()?.status == 200){
                         showData(response.body()!!)
+                    }else{
+                        recyclerview.visibility = View.GONE
+                        Toast.makeText(applicationContext,"data not found", Toast.LENGTH_LONG).show()
                     }
                 }
 
                 override fun onFailure(call: Call<TopRatedBook_Response?>, t: Throwable) {
-                    Toast.makeText(applicationContext,t.message.toString(),Toast.LENGTH_LONG).show()
+                    recyclerview.visibility = View.GONE
+                    Toast.makeText(applicationContext,"data not found", Toast.LENGTH_LONG).show()
                 }
             })
     }
@@ -183,9 +276,6 @@ class HomeActivity : AppCompatActivity() {
     private fun showData(response: TopRatedBook_Response){
         val datas = response.data!!
         topratedbookAdapter.setData(datas)
-//        for (data in datas){
-//            Log.d("TES API","judul: ${data.judul}")
-//        }
     }
 
     @SuppressLint("RestrictedApi")

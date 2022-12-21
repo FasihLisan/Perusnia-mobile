@@ -143,6 +143,22 @@
 
 
             <TextView
+                android:id="@+id/btn_myOrder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="My Order"
+                android:padding="15dp"
+                android:textSize="16dp"
+                android:drawableBottom="@color/black"
+                android:clickable="true"
+                android:focusable="true"
+                android:drawablePadding="5dp"
+                android:drawableLeft="@drawable/ic_baseline_library_books_24"
+                android:drawableTint="@color/black"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"/>
+
+
+            <TextView
                 android:id="@+id/btn_favorite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -157,7 +173,7 @@
                 android:drawableTint="@color/black"
                 android:foreground="?android:attr/selectableItemBackgroundBorderless"/>
 
-                <TextView
+            <TextView
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackgroundBorderless"

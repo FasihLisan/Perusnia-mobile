@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.perusnia.Model.DataX
 import com.example.perusnia.Model.bookResponse
+import com.example.perusnia.Model.userResponse
 import com.example.perusnia.Retrofit.RetrofitClient
 import com.example.perusnia.adapter.BookAdapter
 import com.example.perusnia.adapter.SerachResult_Adapter
@@ -28,9 +29,12 @@ class SerachResult_Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_serach_result)
 
+        val sharedPrefManager = SharedPrefManager.getInstance(this).user
+        val id_users = sharedPrefManager.id_users.toInt()
+
         var key = intent.getStringExtra("keyword")
 
-        setupRecylerView()
+        setupRecylerView(id_users)
         if (key != null) {
             getDataFromAPI(key)
         }else{
@@ -54,13 +58,29 @@ class SerachResult_Activity : AppCompatActivity() {
         }
     }
 
-    private fun setupRecylerView(){
+    private fun setupRecylerView(id_users:Int){
         searchResult_Adapter = SerachResult_Adapter(arrayListOf(),object : SerachResult_Adapter.OnAdapterListener{
             override fun onClick(data: DataX) {
-                startActivity(
-                    Intent(applicationContext,BookDetileActivity::class.java)
-                        .putExtra("book",data)
-                )
+
+                RetrofitClient.instance.getSpesificUser(id_users)
+                    .enqueue(object : Callback<userResponse?> {
+                        override fun onResponse(
+                            call: Call<userResponse?>,
+                            response: Response<userResponse?>,
+                        ) {
+                            val users = response.body()!!.data
+                            startActivity(
+                                Intent(applicationContext,BookDetileActivity::class.java)
+                                    .putExtra("book",data)
+                                    .putExtra("users",users)
+                            )
+                        }
+
+                        override fun onFailure(call: Call<userResponse?>, t: Throwable) {
+
+                        }
+                    })
+
             }
         })
         recyclerview.apply {
@@ -76,7 +96,7 @@ class SerachResult_Activity : AppCompatActivity() {
                    call: Call<bookResponse?>,
                    response: Response<bookResponse?>,
                ) {
-                   if (response.isSuccessful){
+                   if (response.body()?.status == 200){
                        showData(response.body()!!)
                    }else{
                        recyclerview.visibility = View.GONE

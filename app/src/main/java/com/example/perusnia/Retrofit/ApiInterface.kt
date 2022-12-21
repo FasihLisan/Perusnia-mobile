@@ -84,8 +84,40 @@ interface ApiInterface {
     @GET("api/book.php?api_key=fasih123")
     fun getBook():Call<bookResponse>
 
+    @GET("api/book.php?api_key=fasih123")
+    fun getSpesificBook(@Query("id_book")id_book: Int):Call<bookResponse>
+
     @GET("api/searchBook.php?api_key=fasih123")
     fun serachBook(@Query("keyword")keyword:String):Call<bookResponse>
+
+    @GET("api/checkMyBook.php?api_key=fasih123")
+    fun check_mybook(
+        @Query("id_users")id_users: Int,
+        @Query("id_book")id_book: Int
+    ):Call<DefaultResponse>
+
+    @GET("api/getMyBookUsers.php?api_key=fasih123")
+    fun getAllMyBookUsers(
+        @Query("id_users")id_users: Int,
+    ):Call<bookResponse>
+
+    @GET("api/logUserRead.php?api_key=fasih123")
+    fun getLogUserRead(
+        @Query("id_users")id_users: Int,
+    ):Call<singleBookResponse>
+
+    @FormUrlEncoded
+    @POST("api/insert_logUserRead.php?api_key=fasih123")
+    fun insertOrUpdateLogUserRead(
+        @Field("id_users")id_users: Int,
+        @Field("id_book")id_book:Int,
+    ):Call<DefaultResponse>
+
+
+
+
+
+
 
     /*
     **  ------Rate Book API------
@@ -119,8 +151,6 @@ interface ApiInterface {
         @Query("id_users")id_users_params: Int,
         @Field("rate_score")rate_score:Float,
         @Field("comment")comment:String,
-        @Field("id_book")id_book:Int,
-        @Field("id_users")id_users: Int,
     ):Call<DefaultResponse>
 
     @GET("api/deleteFeedback.php?api_key=fasih123")
@@ -216,6 +246,9 @@ interface ApiInterface {
         @Query("id_users") id_users: Int,
     ):Call<cartTotal_Response>
 
+
+    //transaction
+
     @FormUrlEncoded
     @POST("api/insertDetaileTransaction.php?api_key=fasih123")
     fun insertDetaileTransaction(
@@ -223,5 +256,18 @@ interface ApiInterface {
         @Field("id_users") id_users: Int,
         @Field("id_book") id_book: Int,
         ): Call<DefaultResponse>
+
+    @GET("api/getUserTransaction.php?api_key=fasih123")
+    fun getUserTransaction(
+        @Query("id_users")id_users: Int,
+    ):Call<TransactionResponse>
+
+    @GET("api/getDetileUserTransaction.php?api_key=fasih123")
+    fun getDetileUserTransaction(
+        @Query("transaction_id")transaction_id: String,
+    ):Call<DetaileTransactionResponse>
+
+
+
 
 }

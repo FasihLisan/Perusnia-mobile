@@ -17,8 +17,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Perusnia"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31"
-        tools:replace="android:allowBackup,android:usesCleartextTraffic">
+        tools:replace="android:allowBackup,android:usesCleartextTraffic"
+        tools:targetApi="31">
+        <activity
+            android:name=".Detile_MyOrder_Activity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".MyOrderActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".CheckoutActivity"
             android:exported="false">

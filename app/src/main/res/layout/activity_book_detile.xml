@@ -245,7 +245,8 @@
                         android:paddingVertical="10dp"
                         android:text="@string/sinopsisBuku"
                         android:textColor="@color/black"
-                        android:textSize="16dp" />
+                        android:textSize="16dp"
+                        />
 
 
                 </LinearLayout>
@@ -358,7 +359,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingVertical="20dp">
+                    android:paddingVertical="20dp"
+                    android:visibility="gone">
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -472,7 +474,8 @@
                 android:text="Rp. 45.000"
                 android:textStyle="bold"
                 android:textSize="23dp"
-                android:textColor="@color/green"/>
+                android:textColor="@color/green"
+                android:visibility="gone"/>
         </LinearLayout>
 
         <LinearLayout
@@ -534,7 +537,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@color/white"
-                android:text="Buy now"
+                android:text="Read this book"
                 android:textAlignment="center"
                 android:paddingVertical="15dp"
                 />

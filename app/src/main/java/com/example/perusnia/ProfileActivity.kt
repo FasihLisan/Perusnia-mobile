@@ -69,6 +69,10 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(Intent(applicationContext,FavoriteActivity::class.java))
         }
 
+        btn_myOrder.setOnClickListener(){
+            startActivity(Intent(applicationContext,MyOrderActivity::class.java))
+        }
+
         bottom_navigation.selectedItemId = R.id.profile
 
         // Perform item selected listener

@@ -133,7 +133,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="394dp"
-                    android:layout_height="224dp"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="150dp"
@@ -157,6 +157,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/message_log_user_read"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
@@ -166,12 +167,13 @@
                                 android:layout_marginTop="10dp"
                                 android:layout_marginRight="20dp"
                                 android:gravity="left|center"
-                                android:text="Ingat, Kamu memiliki buku yang belum selesai di baca 24 September, 2022"
+                                android:text="Anda tidak memiliki riwayat membca buku di sini!!"
                                 android:textColor="@color/grey1"
                                 android:textSize="12dp"
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/btn_log_user_read"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="20dp"
@@ -180,16 +182,19 @@
                                 android:focusable="true"
                                 android:foreground="?android:attr/selectableItemBackgroundBorderless"
                                 android:text="@string/btn_lanjutMembaca"
-                                android:textColor="@color/green" />
+                                android:textColor="@color/green"
+                                android:visibility="gone"/>
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
 
                     <LinearLayout
+                        android:id="@+id/layout_book_detile"
                         android:layout_width="match_parent"
                         android:layout_height="120dp"
                         android:layout_marginTop="100dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="67dp"
@@ -200,11 +205,12 @@
                             app:cardElevation="15dp">
 
                             <ImageView
+                                android:id="@+id/image_log_user_read"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:contentDescription="Welcome"
                                 android:scaleType="fitXY"
-                                android:src="@drawable/book" />
+                                android:src="@drawable/default_image" />
 
                         </androidx.cardview.widget.CardView>
 
@@ -217,17 +223,19 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/juduBook_log_user_read"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Perkembangan uang seluruh dunia"
+                                android:text="Judul"
                                 android:textColor="@color/black"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/pengarang_log_user_read"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Salman Alrosyid"
+                                android:text="Pengarang"
                                 android:textColor="@color/grey1"
                                 android:textSize="15dp" />
 
@@ -242,7 +250,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center|left"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="105dp"

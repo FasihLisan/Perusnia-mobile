@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.perusnia.Model.DataX
 import com.example.perusnia.Model.bookResponse
+import com.example.perusnia.Model.userResponse
 import com.example.perusnia.Retrofit.RetrofitClient
 import com.example.perusnia.adapter.FavoriteAdapter
 import com.example.perusnia.storage.SharedPrefManager
@@ -46,10 +47,26 @@ class FavoriteActivity : AppCompatActivity() {
     private fun setupRecylerView(){
         favoriteAdapter = FavoriteAdapter(arrayListOf(),object : FavoriteAdapter.OnAdapterListener {
             override fun onClick(data: DataX) {
-                startActivity(
-                    Intent(applicationContext,BookDetileActivity::class.java)
-                        .putExtra("book",data)
-                )
+
+                RetrofitClient.instance.getSpesificUser(id_users)
+                    .enqueue(object : Callback<userResponse?> {
+                        override fun onResponse(
+                            call: Call<userResponse?>,
+                            response: Response<userResponse?>,
+                        ) {
+                            val users = response.body()!!.data
+                            startActivity(
+                                Intent(applicationContext,BookDetileActivity::class.java)
+                                    .putExtra("book",data)
+                                    .putExtra("users",users)
+                            )
+                        }
+
+                        override fun onFailure(call: Call<userResponse?>, t: Throwable) {
+
+                        }
+                    })
+
             }
         })
         recyclerview.apply {
