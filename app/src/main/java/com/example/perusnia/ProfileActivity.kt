@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.perusnia.Model.bookResponse
+import com.example.perusnia.Model.cartTotal_Response
 import com.example.perusnia.Model.userResponse
 import com.example.perusnia.Retrofit.RetrofitClient
 import com.example.perusnia.storage.SharedPrefManager
@@ -72,6 +74,56 @@ class ProfileActivity : AppCompatActivity() {
         btn_myOrder.setOnClickListener(){
             startActivity(Intent(applicationContext,MyOrderActivity::class.java))
         }
+
+
+        RetrofitClient.instance.getAllMyBookUsers(id_users)
+            .enqueue(object : Callback<bookResponse?> {
+                override fun onResponse(
+                    call: Call<bookResponse?>,
+                    response: Response<bookResponse?>,
+                ) {
+                    if (!response.body()?.data.isNullOrEmpty()){
+                        myBookCount.setText(response.body()?.data!!.size.toString())
+                    }
+                }
+
+                override fun onFailure(call: Call<bookResponse?>, t: Throwable) {
+                    myBookCount.text = "0"
+                }
+            })
+
+        RetrofitClient.instance.getFavorite(id_users)
+            .enqueue(object : Callback<bookResponse?> {
+                override fun onResponse(
+                    call: Call<bookResponse?>,
+                    response: Response<bookResponse?>,
+                ) {
+                    if (!response.body()?.data.isNullOrEmpty()){
+                        favoriteCount.setText(response.body()?.data!!.size.toString())
+                    }
+                }
+
+                override fun onFailure(call: Call<bookResponse?>, t: Throwable) {
+                    favoriteCount.setText("0")
+                }
+            })
+
+        RetrofitClient.instance.getCartTotal(id_users)
+            .enqueue(object : Callback<cartTotal_Response?> {
+                override fun onResponse(
+                    call: Call<cartTotal_Response?>,
+                    response: Response<cartTotal_Response?>,
+                ) {
+                    if (response.body()?.data!!.totalItem!!.toInt() != 0){
+                        cartCount.setText(response.body()?.data!!.totalItem)
+                    }
+                }
+
+                override fun onFailure(call: Call<cartTotal_Response?>, t: Throwable) {
+                    cartCount.setText("0")
+                }
+            })
+
 
         bottom_navigation.selectedItemId = R.id.profile
 
